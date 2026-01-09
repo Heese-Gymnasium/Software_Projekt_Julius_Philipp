@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvv8ymd3v7aty"]
+
+[sub_resource type="TileSet" id="TileSet_7dm0k"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(-6.6271973, -8.5563965)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="root_tile" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="root_tile"]
+tile_set = SubResource("TileSet_7dm0k")
