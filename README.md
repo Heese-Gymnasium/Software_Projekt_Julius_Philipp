@@ -33,6 +33,8 @@ Dieses Devlog dokumentiert unseren Fortschritt, Design‑Entscheidungen und tech
 
 ### **13. Januar 2026 – Rendering & Isometrie‑Tests**
 **Status:** 
+- Start menü erstellt (Julius)
+- Grundstruktur für units gelegt (Philipp)
 
 
 
@@ -53,7 +55,7 @@ Dieses Devlog dokumentiert unseren Fortschritt, Design‑Entscheidungen und tech
 
 # Provisorische Struktur, allgemeine Idee, nicht final
 
-
+```
 res://
 │
 ├─ src/                     # Reine Logik, keine Szenen
@@ -107,3 +109,5 @@ res://
     ├─ GameState.gd
     ├─ EventBus.gd
     └─ Config.gd
+
+```
