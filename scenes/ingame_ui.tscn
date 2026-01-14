@@ -2,7 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://dmvyr3l3qdg1k" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="1_v3yap"]
 [ext_resource type="Script" uid="uid://dwm4amv2r106q" path="res://scenes/v_box_container_2.gd" id="2_h2rwu"]
-[ext_resource type="Texture2D" uid="uid://bqly47uxjmuhu" path="res://assets/Square Buttons 26x19.png" id="3_h2rwu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_031h6"]
+texture = ExtResource("1_v3yap")
+region_rect = Rect2(163, 210, 90, 27)
 
 [node name="IngameUi" type="Control"]
 layout_mode = 3
@@ -76,30 +79,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("2_h2rwu")
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 50)
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = ExtResource("3_h2rwu")
-
-[node name="TextureButton2" type="TextureButton" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("3_h2rwu")
-
-[node name="TextureButton3" type="TextureButton" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("3_h2rwu")
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
 
 [node name="seperator" type="Control" parent="VBoxContainer"]
 layout_mode = 2
-
-[connection signal="pressed" from="VBoxContainer/MarginContainer3/VBoxContainer2/TextureButton" to="VBoxContainer/MarginContainer3/VBoxContainer2" method="_on_texture_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MarginContainer3/VBoxContainer2/TextureButton2" to="VBoxContainer/MarginContainer3/VBoxContainer2" method="_on_texture_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MarginContainer3/VBoxContainer2/TextureButton3" to="VBoxContainer/MarginContainer3/VBoxContainer2" method="_on_texture_button_pressed"]
