@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://qteqg5mylr5e"]
+[gd_scene load_steps=5 format=3 uid="uid://qteqg5mylr5e"]
 
 [ext_resource type="Texture2D" uid="uid://dmvyr3l3qdg1k" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="1_v3yap"]
+[ext_resource type="Texture2D" uid="uid://cg7w5owkm0an5" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/buttons/Square Buttons 26x19.png" id="2_031h6"]
+[ext_resource type="Script" uid="uid://dwm4amv2r106q" path="res://scenes/v_box_container_2.gd" id="2_h2rwu"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_v3yap"]
 
@@ -70,11 +72,79 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer/MarginContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer3"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_h2rwu")
+
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("CanvasTexture_v3yap")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer/MarginContainer3/VBoxContainer2/TextureButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_031h6")
+region_rect = Rect2(11, 38, 26, 19)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 6
+
+[node name="TextureButton3" type="TextureButton" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("CanvasTexture_v3yap")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer/MarginContainer3/VBoxContainer2/TextureButton3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_031h6")
+region_rect = Rect2(11, 38, 26, 19)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 6
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_031h6")
+region_rect = Rect2(11, 38, 26, 19)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 6
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/MarginContainer3/VBoxContainer2/NinePatchRect2"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("CanvasTexture_v3yap")
 
 [node name="seperator" type="Control" parent="VBoxContainer"]
 layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer3/VBoxContainer2/NinePatchRect2/TextureButton" to="VBoxContainer/MarginContainer3/VBoxContainer2" method="_on_texture_button_pressed"]
