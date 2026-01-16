@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdmi3e05t8uy3"]
+[gd_scene load_steps=3 format=3 uid="uid://bdmi3e05t8uy3"]
 
-[ext_resource type="Script" path="res://scenes/control_start.gd" id="1_5p55f"]
+[ext_resource type="Script" uid="uid://dnynvo1286p4o" path="res://scenes/control_start.gd" id="1_5p55f"]
+[ext_resource type="Texture2D" uid="uid://dmvyr3l3qdg1k" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="2_r67kn"]
 
 [node name="Menue" type="Control"]
 layout_mode = 3
@@ -11,30 +12,40 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p55f")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 320.0
-offset_top = -60.0
-offset_right = -320.0
-offset_bottom = 50.5
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Startgame_Button" type="Button" parent="VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_r67kn")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Startgame_Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start Game"
 
-[node name="Option_Button" type="Button" parent="VBoxContainer"]
+[node name="Option_Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
-[node name="Quit_button" type="Button" parent="VBoxContainer"]
+[node name="Quit_button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/Startgame_Button" to="." method="_on_startgame_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Startgame_Button" to="." method="_on_startgame_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit_button" to="." method="_on_quit_button_pressed"]

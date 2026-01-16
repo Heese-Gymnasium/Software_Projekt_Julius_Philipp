@@ -3,7 +3,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$VBoxContainer/Startgame_Button.grab_focus() # Replace with function body.
+	pass
+	#$VBoxContainer/Startgame_Button.grab_focus() # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
