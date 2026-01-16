@@ -1,11 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://qteqg5mylr5e"]
+[gd_scene load_steps=7 format=3 uid="uid://qteqg5mylr5e"]
 
+[ext_resource type="Script" uid="uid://ci0h0iv68tndx" path="res://scenes/control_menue.gd" id="1_h2rwu"]
 [ext_resource type="Texture2D" uid="uid://dmvyr3l3qdg1k" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="1_v3yap"]
 [ext_resource type="Script" uid="uid://dwm4amv2r106q" path="res://scenes/v_box_container_2.gd" id="2_h2rwu"]
+[ext_resource type="Script" uid="uid://bhxtc60x5k3lf" path="res://scenes/margin_container.gd" id="4_hifx3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_031h6"]
 texture = ExtResource("1_v3yap")
-region_rect = Rect2(163, 210, 90, 27)
+region_rect = Rect2(163, 178, 90, 27)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_npobg"]
+texture = ExtResource("1_v3yap")
+texture_margin_top = 9.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(180, 147, 24, 25)
 
 [node name="IngameUi" type="Control"]
 layout_mode = 3
@@ -15,26 +23,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Control_Menue" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_h2rwu")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="main_ui" type="VBoxContainer" parent="Control_Menue"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="main_ui_shell" type="MarginContainer" parent="Control_Menue/main_ui"]
 custom_minimum_size = Vector2(1000, 200)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/MarginContainer2"]
+[node name="Backround" type="NinePatchRect" parent="Control_Menue/main_ui/main_ui_shell"]
 layout_mode = 2
 texture = ExtResource("1_v3yap")
 region_rect = Rect2(741, 38, 22, 22)
@@ -43,28 +52,41 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="seperator" type="Control" parent="Control_Menue/main_ui"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -200.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Stats" type="VBoxContainer" parent="Control_Menue"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+[node name="Stats_shell" type="MarginContainer" parent="Control_Menue/Stats"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Backround" type="NinePatchRect" parent="Control_Menue/Stats/Stats_shell"]
+layout_mode = 2
+texture = ExtResource("1_v3yap")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Seperator" type="Control" parent="Control_Menue/Stats"]
+layout_mode = 2
+
+[node name="Ui_Control" type="VBoxContainer" parent="Control_Menue"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Ui_Control_shell" type="MarginContainer" parent="Control_Menue/Ui_Control"]
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer3"]
+[node name="Backround" type="NinePatchRect" parent="Control_Menue/Ui_Control/Ui_Control_shell"]
 layout_mode = 2
 texture = ExtResource("1_v3yap")
 region_rect = Rect2(741, 38, 22, 22)
@@ -73,18 +95,63 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer3"]
+[node name="Button_shell" type="VBoxContainer" parent="Control_Menue/Ui_Control/Ui_Control_shell"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("2_h2rwu")
 
-[node name="Button" type="Button" parent="VBoxContainer/MarginContainer3/VBoxContainer2"]
+[node name="Units" type="Button" parent="Control_Menue/Ui_Control/Ui_Control_shell/Button_shell"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "Units"
 
-[node name="seperator" type="Control" parent="VBoxContainer"]
+[node name="Cards" type="Button" parent="Control_Menue/Ui_Control/Ui_Control_shell/Button_shell"]
+custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "Cards"
+
+[node name="End_Turn" type="Button" parent="Control_Menue/Ui_Control/Ui_Control_shell/Button_shell"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "End Turn"
+
+[node name="Close_Menue" type="Button" parent="Control_Menue/Ui_Control/Ui_Control_shell/Button_shell"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "Close"
+autowrap_mode = 3
+
+[node name="seperator" type="Control" parent="Control_Menue/Ui_Control"]
+layout_mode = 2
+
+[node name="mini_menue" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("4_hifx3")
+
+[node name="Button" type="Button" parent="mini_menue"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_npobg")
+
+[connection signal="pressed" from="Control_Menue/Ui_Control/Ui_Control_shell/Button_shell/Close_Menue" to="Control_Menue" method="_on_close_menue_pressed"]
+[connection signal="pressed" from="Control_Menue/Ui_Control/Ui_Control_shell/Button_shell/Close_Menue" to="mini_menue" method="_on_close_menue_pressed"]
+[connection signal="pressed" from="mini_menue/Button" to="Control_Menue" method="_on_button_pressed"]
+[connection signal="pressed" from="mini_menue/Button" to="mini_menue" method="_on_button_pressed"]
