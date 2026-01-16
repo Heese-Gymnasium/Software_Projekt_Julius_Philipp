@@ -22,7 +22,11 @@ func create_unit_buttons(units):
 
 	for unit in units:
 		var button := Button.new()
-		
+		button.add_theme_color_override("font_color", Color.YELLOW)
+		button.add_theme_color_override("font_hover_color", Color.ORANGE)
+		button.add_theme_color_override("font_pressed_color", Color.WHITE)
+		button.add_theme_color_override("font_disabled_color", Color.GRAY)
+
 		# Text
 		button.text = unit.name + " (HP: %d)" % unit.hp
 		
