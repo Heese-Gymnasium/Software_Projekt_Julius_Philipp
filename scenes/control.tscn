@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bdmi3e05t8uy3"]
 
-[ext_resource type="Script" uid="uid://dnynvo1286p4o" path="res://scenes/control_start.gd" id="1_5p55f"]
+[ext_resource type="Script" uid="uid://dnynvo1286p4o" path="res://scripts/control_start.gd" id="1_5p55f"]
 [ext_resource type="Texture2D" uid="uid://dmvyr3l3qdg1k" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="2_r67kn"]
-[ext_resource type="Script" uid="uid://d14mqdewm1kil" path="res://scenes/startgame_button.gd" id="3_brbbq"]
+[ext_resource type="Script" uid="uid://d14mqdewm1kil" path="res://scripts/startgame_button.gd" id="3_brbbq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_brbbq"]
 texture = ExtResource("2_r67kn")
