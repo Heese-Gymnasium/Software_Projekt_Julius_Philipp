@@ -1,7 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdmi3e05t8uy3"]
+[gd_scene load_steps=7 format=3 uid="uid://bdmi3e05t8uy3"]
 
 [ext_resource type="Script" uid="uid://dnynvo1286p4o" path="res://scenes/control_start.gd" id="1_5p55f"]
 [ext_resource type="Texture2D" uid="uid://dmvyr3l3qdg1k" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="2_r67kn"]
+[ext_resource type="Script" uid="uid://d14mqdewm1kil" path="res://scenes/startgame_button.gd" id="3_brbbq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_brbbq"]
+texture = ExtResource("2_r67kn")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(163, 178, 90, 27)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8n18e"]
+texture = ExtResource("2_r67kn")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(163, 178, 90, 27)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tjwpk"]
+texture = ExtResource("2_r67kn")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(163, 178, 90, 27)
 
 [node name="Menue" type="Control"]
 layout_mode = 3
@@ -37,14 +62,19 @@ size_flags_vertical = 4
 
 [node name="Startgame_Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/icon_focus_color = Color(0, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_brbbq")
 text = "Start Game"
+script = ExtResource("3_brbbq")
 
 [node name="Option_Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_8n18e")
 text = "Options"
 
 [node name="Quit_button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_tjwpk")
 text = "Quit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Startgame_Button" to="." method="_on_startgame_button_pressed"]
