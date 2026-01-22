@@ -5,6 +5,8 @@ extends Node
 @onready var _Map_x = 39
 @onready var _Map_y = 39
 
+var map_preview = []
+
 var Map:
 	get:
 		return _Map
@@ -28,14 +30,19 @@ var Map_y:
 
 
 func _initialize_Map(x, y):
-	var map = []
 	var line = []
 	for i in range(x):
 		line.append([0, 1]) #0 ist die Unit, die das Felde belegt, wobei 0 für keine unit auf dem Feld steht, 1 ist der terraintyp
-	map.resize(y)
-	map.fill(line)
-	Map = map
+	map_preview.resize(y)
+	map_preview.fill(line)
+	Map = map_preview
 
+
+func _add_unit(x, y, unit):
+	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
+		map_preview[y][x][0] = unit
+	else:
+		push_error("unit placed in Void")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

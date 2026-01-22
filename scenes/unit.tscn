@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cu51x05mjyoni" path="res://scripts/unit.gd" id="2_k673f"]
 
 [node name="Unit" type="Node2D"]
+script = ExtResource("2_k673f")
 
 [node name="UnitPh" type="Sprite2D" parent="."]
 texture = ExtResource("1_o7ajc")

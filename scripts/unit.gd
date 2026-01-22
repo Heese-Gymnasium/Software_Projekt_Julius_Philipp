@@ -1,5 +1,7 @@
 extends Node
 
+var x
+var y
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
