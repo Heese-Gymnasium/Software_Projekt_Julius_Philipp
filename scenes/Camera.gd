@@ -1,5 +1,10 @@
 extends Node2D
 
+@export var limit_left: float = -500
+@export var limit_right: float = 500
+@export var limit_top: float = -500
+@export var limit_bottom: float = 500
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -20,6 +25,10 @@ func _process(delta):
 
 	# Normalisieren, damit diagonale Bewegung nicht schneller ist
 	if input_vector != Vector2.ZERO:
-		input_vector = input_vector.normalized()
-	
+		input_vector = input_vector.normalized() * 2
 	position += input_vector * speed * delta
+	var pos = self.position
+	pos.x = clamp(pos.x, limit_left, limit_right)
+	pos.y = clamp(pos.y, limit_top, limit_bottom)
+
+	position = pos
