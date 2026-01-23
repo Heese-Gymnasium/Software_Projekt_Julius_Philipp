@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://cu51x05mjyoni" path="res://scripts/unit.gd" id="2_k673f"]
 
 [node name="Unit" type="Node2D"]
+scale = Vector2(0.13, 0.13)
 script = ExtResource("2_k673f")
 
 [node name="UnitPh" type="Sprite2D" parent="."]
+position = Vector2(0, -38.46154)
 texture = ExtResource("1_o7ajc")
 script = ExtResource("2_k673f")

@@ -37,6 +37,10 @@ Dieses Devlog dokumentiert unseren Fortschritt, Design‑Entscheidungen und tech
 - Grundstruktur für units gelegt (Philipp)
 
 
+### **22. Januar 2026 - Map-Datenstruktur**
+**Status:**
+-Map-Datenstruktur hinzugefügt(nach einigem hin und her über die Speichermethode)
+
 
 ## 🔮 Nächste Schritte
 - Einfache Unit implementieren  
