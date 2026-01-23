@@ -13,9 +13,43 @@ var Map:
 	set(value):
 		if typeof(value) == TYPE_ARRAY and value.all(func(v): return typeof(v) == TYPE_ARRAY):
 			_Map = value
+		elif typeof(value) == TYPE_ARRAY and validate_packs(value):
+			for i in range(0, value.size(), 3):
+				var x = value[i]
+				var y = value[i+1]
+				var arr = value[i+2]
+				_Map[y[x]] = arr
 		else:
-			push_error("Map must be an array of arrays")
-		
+			push_error("value for _Map.set must be of type: [x, y, [int, int],...] or same type as _Map: [ y: [x: [int, int] ]]")
+				
+func validate_packs(pack: Array) -> bool:
+	if pack.size() % 3 != 0:
+		return false
+	for i in range(0, pack.size(), 3):
+
+		var a = pack[i]
+		var b = pack[i+1]
+		var arr = pack[i+2]
+
+		# 3) a muss int sein
+		if not (a is int):
+			return false
+
+		# 4) b muss int sein
+		if not (b is int):
+			return false
+
+		# 5) arr muss Array sein
+		if not (arr is Array):
+			return false
+
+		# 6) arr muss genau 2 ints enthalten
+		if arr.size() != 2:
+			return false
+
+		if not (arr[0] is int and arr[1] is int):
+			return false
+	return true
 var Map_x:
 	get:
 		return _Map_x
