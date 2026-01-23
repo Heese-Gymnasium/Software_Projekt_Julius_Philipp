@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bvij7yr785cyd" path="res://assets/simple64x_tiles6.png" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bktrrue1penay" path="res://scenes/Camera.tscn" id="3_sugp2"]
-[ext_resource type="Script" path="res://scripts/TileMapLayer_control.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://cr175ahdeykkk" path="res://scripts/TileMapLayer_control.gd" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://ea2evanptt5u" path="res://assets/iso_tileset.png" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://qteqg5mylr5e" path="res://scenes/ingame_ui.tscn" id="4_jyhfs"]
 
