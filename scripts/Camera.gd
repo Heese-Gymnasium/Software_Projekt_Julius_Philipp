@@ -7,11 +7,12 @@ extends Node2D
 @export var scroll_speed: float = 400.0
 @export var max_speed: float = 600.0
 @export var edge_size: int = 100
+@export var drag_speed := 1.0
 
-var left_mouse_down = false
+var mouse_is_first_down: bool = true
+var right_mouse_down = false
 var alt_pos: Vector2
 var middle_mouse_down := false
-var down = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,15 +34,10 @@ func _input(event):
 				#middle_mouse_down = false
 				#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			if event.is_pressed():
-				left_mouse_down = true
-				if not down:
-					alt_pos = get_viewport().get_mouse_position()
-					down = true
-			elif event.is_released():
-				left_mouse_down = false
-				down = false
-			
+			right_mouse_down = event.pressed
+	elif event is InputEventMouseMotion:
+		if right_mouse_down:
+			global_position -= event.relative
 
 
 func _process(delta):
@@ -74,7 +70,7 @@ func _process(delta):
 	var speed_factor_x = 0.0
 	var speed_factor_y = 0.0
 
-	if middle_mouse_down and not left_mouse_down:
+	if middle_mouse_down and not right_mouse_down:
 		if mouse_pos.x <= edge_size:    
 			speed_factor_x = 1.0 - (mouse_pos.x / edge_size)
 			movement.x -= speed_factor_x
@@ -87,13 +83,23 @@ func _process(delta):
 		elif mouse_pos.y >= viewport_size.y - edge_size:
 			speed_factor_y = 1.0 - ((viewport_size.y - mouse_pos.y) / edge_size)
 			movement.y += speed_factor_y
-	elif left_mouse_down:
-		if not alt_pos == mouse_pos:
-			movement.y = (alt_pos.y - mouse_pos.y)
-			movement.x = (alt_pos.x - mouse_pos.x)
-			movement = movement.normalized()
-			position += movement * delta * speed
-		alt_pos = mouse_pos
+	#elif right_mouse_down:
+		#if not alt_pos == mouse_pos:
+				#var mouse_delta = mouse_pos - alt_pos
+				#
+				#var tile_width := 32.0
+				#var tile_height := 16.0
+#
+				#var dx = mouse_delta.x
+				#var dy = mouse_delta.y
+				## Iso-Umrechnung
+				#var iso_delta = Vector2(
+					#(dx / tile_width + dy / tile_height) * tile_width,
+					#(dy / tile_height - dx / tile_width) * tile_height
+				#) * drag_speed
+#
+				#position -= iso_delta
+		#alt_pos = mouse_pos
 
 
 
