@@ -113,10 +113,16 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
 layout_mode = 2
 
-[node name="Card_Container" type="VBoxContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+layout_mode = 2
+
+[node name="Card_Container" type="VBoxContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer2"]
 layout_mode = 2
 
 [node name="seperator" type="Control" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui"]
@@ -153,6 +159,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.17254902, 0.6392157, 0.5647059, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
 text = "Units"
 script = ExtResource("6_cm6yq")
@@ -163,6 +170,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
 text = "Cards"
 
@@ -171,6 +179,9 @@ custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/icon_hover_color = Color(0, 0.62352943, 0.5568628, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
 text = "End Turn"
 
@@ -179,6 +190,8 @@ custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
 text = "Close"
 autowrap_mode = 3

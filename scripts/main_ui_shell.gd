@@ -1,8 +1,10 @@
 extends MarginContainer
 
 @onready var main_active: int = 0
-@onready var unit_main := $VBoxContainer
-@onready var cards_main := $Card_Container
+@onready var unit_main := $ScrollContainer/VBoxContainer
+@onready var cards_main := $ScrollContainer2/Card_Container
+@onready var unit_main_parent := $ScrollContainer
+@onready var cards_main_parent := $ScrollContainer2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,29 +24,36 @@ func on_turn_start():
 	create_card_buttons(cards)
 	var units = get_units(active_player)
 	create_unit_buttons(units)
+	unit_main_parent.show() 
+	cards_main_parent.hide()
+	main_active = 0
 
 
 func _on_units_pressed() -> void:
-	unit_main.show() 
-	cards_main.hide()
+	unit_main_parent.show() 
+	cards_main_parent.hide()
 	main_active = 0
 
 
 func _on_cards_pressed() -> void:
-	unit_main.hide()
-	cards_main.show()
+	unit_main_parent.hide()
+	cards_main_parent.show()
 	main_active = 1
 	
 
 func create_unit_buttons(units):
+	
+	unit_main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	unit_main.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	# Alte Buttons löschen (falls Units sich ändern)
 	for child in unit_main.get_children():
 		child.queue_free()
 
 	for unit in units:
 		var button := Button.new()
-		button.add_theme_color_override("font_color", "009f8e")
-		button.add_theme_color_override("font_hover_color", Color.ORANGE)
+		button.add_theme_color_override("font_color", Color("#009f8e"))
+		button.add_theme_color_override("font_focus_color", Color("#009f8e"))
+		button.add_theme_color_override("font_hover_color", Color.WHITE)
 		button.add_theme_color_override("font_pressed_color", Color.WHITE)
 		button.add_theme_color_override("font_disabled_color", Color.GRAY)
 
@@ -52,7 +61,9 @@ func create_unit_buttons(units):
 		button.text = unit.name + " (HP: %d)" % unit.hp
 		
 		# Mindestgröße
-		button.custom_minimum_size = Vector2(200, 40)
+		button.custom_minimum_size = Vector2(350, 40)
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		
 		var spritesheet: Texture2D = preload("res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png")
 		
@@ -76,17 +87,22 @@ func create_unit_buttons(units):
 		#button.pressed.connect(_on_unit_button_pressed.bind(unit))
 
 		unit_main.add_child(button)
+		print(button.get_parent())
 
 
 
 func create_card_buttons(cards):
+	cards_main.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cards_main.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	
 	# Alte Buttons löschen (falls Units sich ändern)
 	for child in unit_main.get_children():
 		child.queue_free()
 
 	for card in cards:
 		var button := Button.new()
-		button.add_theme_color_override("font_color", "009f8e")
+		button.add_theme_color_override("font_color", Color("#009f8e"))
+		button.add_theme_color_override("font_focus_color", Color("#009f8e"))
 		button.add_theme_color_override("font_hover_color", Color.WHITE)
 		button.add_theme_color_override("font_pressed_color", Color.WHITE)
 		button.add_theme_color_override("font_disabled_color", Color.GRAY)
@@ -95,7 +111,10 @@ func create_card_buttons(cards):
 		button.text = card.name + " (Cost: %d)" % card.cost
 		
 		# Mindestgröße
-		button.custom_minimum_size = Vector2(200, 40)
+		button.custom_minimum_size = Vector2(350, 40)
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+
 		
 		var spritesheet: Texture2D = preload("res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png")
 		
@@ -126,11 +145,17 @@ func get_units(active_player):
 	var units = [
 	{"name": "Soldat", "hp": 100},
 	{"name": "Bogenschütze", "hp": 70},
+	{"name": "Magier", "hp": 50},
+	{"name": "Soldat", "hp": 100},
+	{"name": "Bogenschütze", "hp": 70},
 	{"name": "Magier", "hp": 50}]
 	return units
 	
 func get_cards(active_player):
 	var cards = [
+	{"name": "Card1", "cost": 100},
+	{"name": "Card2", "cost": 70},
+	{"name": "Card3", "cost": 50},
 	{"name": "Card1", "cost": 100},
 	{"name": "Card2", "cost": 70},
 	{"name": "Card3", "cost": 50}]
