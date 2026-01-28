@@ -43,7 +43,7 @@ func create_unit_buttons(units):
 
 	for unit in units:
 		var button := Button.new()
-		button.add_theme_color_override("font_color", Color.YELLOW)
+		button.add_theme_color_override("font_color", "009f8e")
 		button.add_theme_color_override("font_hover_color", Color.ORANGE)
 		button.add_theme_color_override("font_pressed_color", Color.WHITE)
 		button.add_theme_color_override("font_disabled_color", Color.GRAY)
@@ -86,8 +86,8 @@ func create_card_buttons(cards):
 
 	for card in cards:
 		var button := Button.new()
-		button.add_theme_color_override("font_color", Color.YELLOW)
-		button.add_theme_color_override("font_hover_color", Color.ORANGE)
+		button.add_theme_color_override("font_color", "009f8e")
+		button.add_theme_color_override("font_hover_color", Color.WHITE)
 		button.add_theme_color_override("font_pressed_color", Color.WHITE)
 		button.add_theme_color_override("font_disabled_color", Color.GRAY)
 
