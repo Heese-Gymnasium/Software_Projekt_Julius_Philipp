@@ -41,10 +41,25 @@ Dieses Devlog dokumentiert unseren Fortschritt, Design‑Entscheidungen und tech
 **Status:**
 -Map-Datenstruktur hinzugefügt(nach einigem hin und her über die Speichermethode)
 
+### **bis 30.01 Erledigt:**
+**Julius:**
+-  Tilemap Layer festgelegt und erstellt.
+-  Startmenue
+-  ingame_Ui, mit zugriff auf alle Units und Karten, holt Daten per Getter, derzeit noch beispieldaten
+-  Map Datenstruktur mit Philipp abgesprochen, setter für map definiert
+-  isometrische Berechnungen vorerschlossen
+-  Kamera bewegung und Borders, Pfeiltasten, bewegung per mouse position und dragging
+
+**Philip:**
+-  Map hinzugefügt, getter und Datenstruktur definiert
+-  beschäftigung mit Isometrie, funktionsweise 2.Layer erste überlegungen.
+
 
 ## 🔮 Nächste Schritte
-- Einfache Unit implementieren  
-- Menu und interface erstellen 
+- Map Datenstruktur zu Grafik, Units solle abbildbar sein.
+- Einfache Unit implementieren
+- UI: Tile Highlight (Julius)
+- Preview, wenn Units implementiert sind 
 
 ---
 
@@ -78,7 +93,7 @@ res://
 │   │       └─ push_action.gd
 │   │
 │   ├─ enemies/
-│   │   ├─ enemy_controller.gd
+│   │   ├─ enemy_controller.gd (Lokaler Multiplayer?)
 │   │   └─ intent_system.gd
 │   │
 │   ├─ ui/                  # UI-Logik
