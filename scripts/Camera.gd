@@ -97,7 +97,6 @@ func _process(delta):
 					#(dx / tile_width + dy / tile_height) * tile_width,
 					#(dy / tile_height - dx / tile_width) * tile_height
 				#) * drag_speed
-#
 				#position -= iso_delta
 		#alt_pos = mouse_pos
 
