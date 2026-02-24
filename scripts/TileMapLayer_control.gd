@@ -11,6 +11,9 @@ extends Node
 
 var map_preview = []
 
+var base_unit = load("res://scenes/unit.tscn")
+
+
 var Map:
 	get:
 		return _Map
@@ -79,7 +82,11 @@ func _initialize_Map(x, y):
 func _add_unit(x, y, unit):
 	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
 		map_preview[y][x][0] = unit
-		$Unit/UnitPh.spawn(x, y)
+		var trgt_unit = base_unit.instantiate()
+		self.add_child(trgt_unit)
+		var pos_x = (x - y) * tile_width / 2
+		var pos_y = (x + y) * tile_height / 2
+		trgt_unit.spawn(pos_x, pos_y)
 	else:
 		push_error("unit placed in Void")
 

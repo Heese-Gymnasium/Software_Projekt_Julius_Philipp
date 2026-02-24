@@ -18,10 +18,10 @@ var y:
 
 
 func spawn(spawn_x, spawn_y):
-	x = spawn_x
-	y = spawn_y
-	var pos_x = (x / $TileMapLayer.tile_set.tile_size.x + y / $TileMapLayer.tile_set.tile_size.y) * $TileMapLayer.tile_set.tile_size.x
-	var pos_y = (y / $TileMapLayer.tile_set.tile_size.y - x / $TileMapLayer.tile_set.tile_size.x) * $TileMapLayer.tile_set.tile_size.y
+	var pos_x = spawn_x
+	var pos_y = spawn_y
+	#var pos_x = (x / $TileMapLayer.tile_set.tile_size.x + y / $TileMapLayer.tile_set.tile_size.y) * $TileMapLayer.tile_set.tile_size.x
+	#var pos_y = (y / $TileMapLayer.tile_set.tile_size.y - x / $TileMapLayer.tile_set.tile_size.x) * $TileMapLayer.tile_set.tile_size.y
 	print(pos_x)
 	print(pos_y)
 	$UnitPh.position = Vector2(pos_x, pos_y)
