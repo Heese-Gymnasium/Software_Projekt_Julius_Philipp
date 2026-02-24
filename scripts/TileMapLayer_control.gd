@@ -70,15 +70,16 @@ var Map_y:
 func _initialize_Map(x, y):
 	var line = []
 	for i in range(x):
-		line.append([0, 1]) #0 ist die Unit, die das Felde belegt, wobei 0 für keine unit auf dem Feld steht, 1 ist der terraintyp
+		line.append([0, 1]) #0 ist die Unit, die das Feld belegt, wobei 0 für keine unit auf dem Feld steht, 1 ist der terraintyp
 	map_preview.resize(y)
 	map_preview.fill(line)
 	Map = map_preview
 
-
+		
 func _add_unit(x, y, unit):
 	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
 		map_preview[y][x][0] = unit
+		$Unit/UnitPh.spawn(x, y)
 	else:
 		push_error("unit placed in Void")
 
