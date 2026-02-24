@@ -5,6 +5,10 @@ extends Node
 @onready var _Map_x = 39
 @onready var _Map_y = 39
 
+@onready var tile_width = self.tile_set.tile_size.x
+@onready var tile_height = self.tile_set.tile_size.y
+
+
 var map_preview = []
 
 var Map:
@@ -81,6 +85,7 @@ func _add_unit(x, y, unit):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_initialize_Map(Map_x, Map_y)
+	_add_unit(1, 1, "base")
 	pass # Replace with function body.
 
 
