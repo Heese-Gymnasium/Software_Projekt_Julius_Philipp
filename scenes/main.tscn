@@ -1,10 +1,30 @@
-[gd_scene load_steps=9 format=4 uid="uid://q1bcafdsbbii"]
+[gd_scene load_steps=21 format=4 uid="uid://q1bcafdsbbii"]
 
 [ext_resource type="Texture2D" uid="uid://bvij7yr785cyd" path="res://assets/simple64x_tiles6.png" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://bktrrue1penay" path="res://scenes/Camera.tscn" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://cr175ahdeykkk" path="res://scripts/TileMapLayer_control.gd" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://ea2evanptt5u" path="res://assets/iso_tileset.png" id="4_7mycd"]
-[ext_resource type="PackedScene" uid="uid://qteqg5mylr5e" path="res://scenes/ingame_ui.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://071p0xwyu6bs" path="res://scripts/highlight_manager.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://ci0h0iv68tndx" path="res://scripts/control_menue.gd" id="6_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://dmvyr3l3qdg1k" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="7_jkv2x"]
+[ext_resource type="Script" uid="uid://bbhhqhkdbc4ln" path="res://scripts/v_box_container.gd" id="8_jbj1t"]
+[ext_resource type="Script" uid="uid://dyi8a4koas3hw" path="res://scripts/main_ui_shell.gd" id="9_muem4"]
+[ext_resource type="Script" uid="uid://cvjspttymj8ic" path="res://scripts/scroll_container.gd" id="10_dp3eg"]
+[ext_resource type="Script" uid="uid://c5g4687lkioww" path="res://scripts/scroll_container_2.gd" id="11_0ld40"]
+[ext_resource type="Script" uid="uid://dwm4amv2r106q" path="res://scripts/v_box_container_2.gd" id="12_gqmmt"]
+[ext_resource type="Script" uid="uid://bguwdpf5ydm1x" path="res://scripts/units_button_(menue).gd" id="13_yc10j"]
+[ext_resource type="Script" uid="uid://cxd8i7vgoec8p" path="res://scripts/Camera.gd" id="14_jkv2x"]
+[ext_resource type="Script" uid="uid://bhxtc60x5k3lf" path="res://scripts/margin_container.gd" id="14_jscy8"]
+[ext_resource type="Script" uid="uid://5wvfkcomxrxn" path="res://scripts/camera_2d.gd" id="15_jbj1t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_031h6"]
+texture = ExtResource("7_jkv2x")
+region_rect = Rect2(163, 178, 90, 27)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_npobg"]
+texture = ExtResource("7_jkv2x")
+texture_margin_top = 9.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(180, 147, 24, 25)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("1_ig7tw")
@@ -196,6 +216,209 @@ sources/3 = SubResource("TileSetAtlasSource_kek77")
 
 [node name="Main" type="Node2D"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="IngameUi" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -3.0
+offset_right = -2.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/IngameUi"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/IngameUi/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Control_Menue" type="MarginContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -204.0
+offset_right = 500.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("6_a8y0u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue"]
+layout_mode = 2
+
+[node name="Stats" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Stats_shell" type="MarginContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Backround" type="NinePatchRect" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell"]
+layout_mode = 2
+texture = ExtResource("7_jkv2x")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Stats_label" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("8_jbj1t")
+
+[node name="health_label" type="Label" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="mana_label" type="Label" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Seperator" type="Control" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="main_ui" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="main_ui_shell" type="MarginContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui"]
+custom_minimum_size = Vector2(750, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("9_muem4")
+
+[node name="Backround" type="NinePatchRect" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+layout_mode = 2
+texture = ExtResource("7_jkv2x")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+layout_mode = 2
+script = ExtResource("10_dp3eg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+layout_mode = 2
+script = ExtResource("11_0ld40")
+
+[node name="Card_Container" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer2"]
+layout_mode = 2
+
+[node name="seperator" type="Control" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui"]
+layout_mode = 2
+
+[node name="Ui_Control" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Ui_Control_shell" type="MarginContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Backround" type="NinePatchRect" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell"]
+layout_mode = 2
+texture = ExtResource("7_jkv2x")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Button_shell" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("12_gqmmt")
+
+[node name="Units" type="Button" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.17254902, 0.6392157, 0.5647059, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "Units"
+script = ExtResource("13_yc10j")
+
+[node name="Cards" type="Button" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "Cards"
+
+[node name="End_Turn" type="Button" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/icon_hover_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "End Turn"
+
+[node name="Close_Menue" type="Button" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
+text = "Close"
+autowrap_mode = 3
+
+[node name="seperator" type="Control" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control"]
+layout_mode = 2
+
+[node name="mini_menue" type="MarginContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("14_jscy8")
+
+[node name="Button" type="Button" parent="CanvasLayer/IngameUi/MarginContainer/Control/mini_menue"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_npobg")
+
 [node name="root_tile" type="Node2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="root_tile"]
@@ -203,13 +426,27 @@ tile_map_data = PackedByteArray("AAD//wAAAwACAAAAAAAAAAAAAwACAAAAAAABAAEAAwACAAA
 tile_set = SubResource("TileSet_7dm0k")
 script = ExtResource("3_tbgi4")
 
-[node name="Node2D" parent="." instance=ExtResource("3_sugp2")]
+[node name="Highligth_Map" type="TileMapLayer" parent="root_tile"]
+tile_set = SubResource("TileSet_7dm0k")
+script = ExtResource("3_tbgi4")
+
+[node name="Highlight_Manager" type="Node2D" parent="root_tile"]
+script = ExtResource("4_tefeu")
+
+[node name="Node2D" type="Node2D" parent="."]
 position = Vector2(4, 6)
+script = ExtResource("14_jkv2x")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+script = ExtResource("15_jbj1t")
 
-[node name="IngameUi" parent="CanvasLayer" instance=ExtResource("4_jyhfs")]
-offset_left = -2.0
-offset_top = -3.0
-offset_right = -2.0
-offset_bottom = -3.0
+[connection signal="mouse_entered" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer" to="Node2D/Camera2D" method="_on_scroll_container_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer" to="Node2D/Camera2D" method="_on_scroll_container_mouse_exited"]
+[connection signal="scroll_ended" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer" to="Node2D/Camera2D" method="_on_scroll_container_scroll_ended"]
+[connection signal="scroll_started" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer" to="Node2D/Camera2D" method="_on_scroll_container_scroll_started"]
+[connection signal="pressed" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Units" to="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell" method="_on_units_pressed"]
+[connection signal="pressed" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Cards" to="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell" method="_on_cards_pressed"]
+[connection signal="pressed" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Close_Menue" to="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue" method="_on_close_menue_pressed"]
+[connection signal="pressed" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Close_Menue" to="CanvasLayer/IngameUi/MarginContainer/Control/mini_menue" method="_on_close_menue_pressed"]
+[connection signal="pressed" from="CanvasLayer/IngameUi/MarginContainer/Control/mini_menue/Button" to="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/IngameUi/MarginContainer/Control/mini_menue/Button" to="CanvasLayer/IngameUi/MarginContainer/Control/mini_menue" method="_on_button_pressed"]
