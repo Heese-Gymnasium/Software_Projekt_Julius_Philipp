@@ -427,7 +427,6 @@ tile_map_data = PackedByteArray("AAADAAIAAwACAAAAAAACAAIAAwACAAAAAAACAAMAAwACAAA
 tile_set = SubResource("TileSet_7dm0k")
 script = ExtResource("3_tbgi4")
 
-<<<<<<< HEAD
 [node name="Highligth_Map" type="TileMapLayer" parent="root_tile"]
 tile_set = SubResource("TileSet_7dm0k")
 script = ExtResource("3_tbgi4")
@@ -436,9 +435,6 @@ script = ExtResource("3_tbgi4")
 script = ExtResource("4_tefeu")
 
 [node name="Node2D" type="Node2D" parent="."]
-=======
-[node name="camera" parent="." instance=ExtResource("3_sugp2")]
->>>>>>> dfe3d91e305262fbd4e3585da015c7099c9c0807
 position = Vector2(4, 6)
 script = ExtResource("14_jkv2x")
 
