@@ -29,8 +29,11 @@ func _process(delta: float) -> void:
 
 
 func _on_scroll_container_mouse_exited() -> void:
-	allow_zoom = true
+	pass
 	
 
 func _on_scroll_container_mouse_entered() -> void:
 	allow_zoom = false 
+
+func _on_margin_container_mouse_entered() -> void:
+	allow_zoom = true

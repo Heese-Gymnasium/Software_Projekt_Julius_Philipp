@@ -441,6 +441,7 @@ script = ExtResource("14_jkv2x")
 [node name="Camera2D" type="Camera2D" parent="Node2D"]
 script = ExtResource("15_jbj1t")
 
+[connection signal="mouse_entered" from="CanvasLayer/IngameUi/MarginContainer" to="Node2D/Camera2D" method="_on_margin_container_mouse_entered"]
 [connection signal="mouse_entered" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer" to="Node2D/Camera2D" method="_on_scroll_container_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer" to="Node2D/Camera2D" method="_on_scroll_container_mouse_exited"]
 [connection signal="scroll_ended" from="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer" to="Node2D/Camera2D" method="_on_scroll_container_scroll_ended"]
