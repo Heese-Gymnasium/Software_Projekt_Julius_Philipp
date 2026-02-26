@@ -1,24 +1,33 @@
 extends Node2D
 
-@export var highlight_map_path: NodePath
-
-var highlight_map: TileMap
-var current_cell: Vector2i
-
+var highlight_map: TileMapLayer
+var mouse_old_pos: Vector2i
+var tile_coords_old : Vector2i
+var tileMapLayer : TileMapLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	#highlight_map = get_node(highlight_map_path)
+	highlight_map = self.get_parent().get_node("Highligth_Map")
+	tileMapLayer = self.get_parent().get_node("TileMapLayer")
+	mouse_old_pos = get_global_mouse_position()
+	var local_pos_old = tileMapLayer.to_local(mouse_old_pos)
+	tile_coords_old = tileMapLayer.local_to_map(local_pos_old)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-	#var mouse_world_pos: Vector2 = get_global_mouse_position()
-	#var cell: Vector2i = highlight_map.local_to_map(
-		#highlight_map.to_local(mouse_world_pos)
-	#)
-#
-	#if cell != current_cell:
-		#current_cell = cell
+	var mouse_pos : Vector2i = get_global_mouse_position()
+	var local_pos = tileMapLayer.to_local(mouse_pos)
+	var tile_coords = tileMapLayer.local_to_map(local_pos)
+	var source_id := 1
+	var atlas_coords := Vector2i(3, 0)
+
+	highlight_map.set_cell(tile_coords, source_id, atlas_coords)
+	if tile_coords != tile_coords_old:
+		atlas_coords = Vector2i(3, 1)
+		highlight_map.set_cell(tile_coords_old, source_id, atlas_coords)
+		tile_coords_old = tile_coords
+	mouse_old_pos = mouse_pos
+	
+	

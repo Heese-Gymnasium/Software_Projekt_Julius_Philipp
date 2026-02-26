@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://q1bcafdsbbii"]
+[gd_scene load_steps=23 format=4 uid="uid://q1bcafdsbbii"]
 
 [ext_resource type="Texture2D" uid="uid://bvij7yr785cyd" path="res://assets/simple64x_tiles6.png" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cr175ahdeykkk" path="res://scripts/TileMapLayer_control.gd" id="3_tbgi4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dyi8a4koas3hw" path="res://scripts/main_ui_shell.gd" id="9_muem4"]
 [ext_resource type="Script" uid="uid://cvjspttymj8ic" path="res://scripts/scroll_container.gd" id="10_dp3eg"]
 [ext_resource type="Script" uid="uid://c5g4687lkioww" path="res://scripts/scroll_container_2.gd" id="11_0ld40"]
+[ext_resource type="Texture2D" uid="uid://ciatg3ka7wo83" path="res://assets/iso_tileset_highligth.png" id="11_jbj1t"]
 [ext_resource type="Script" uid="uid://dwm4amv2r106q" path="res://scripts/v_box_container_2.gd" id="12_gqmmt"]
 [ext_resource type="Script" uid="uid://bguwdpf5ydm1x" path="res://scripts/units_button_(menue).gd" id="13_yc10j"]
 [ext_resource type="Script" uid="uid://cxd8i7vgoec8p" path="res://scripts/Camera.gd" id="14_jkv2x"]
@@ -181,6 +182,24 @@ texture = ExtResource("1_ig7tw")
 18:7/0 = 0
 19:7/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_muem4"]
+texture = ExtResource("11_jbj1t")
+texture_region_size = Vector2i(32, 16)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+3:1/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kek77"]
 texture = ExtResource("4_7mycd")
 texture_region_size = Vector2i(32, 32)
@@ -190,8 +209,6 @@ texture_region_size = Vector2i(32, 32)
 1:0/0/texture_origin = Vector2i(0, -8)
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, -8)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, -8)
 4:0/0 = 0
 4:0/0/texture_origin = Vector2i(0, -8)
 5:0/0 = 0
@@ -204,6 +221,9 @@ texture_region_size = Vector2i(32, 32)
 4:1/0 = 0
 5:1/0 = 0
 6:1/0 = 0
+3:0/next_alternative_id = 2
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -8)
 
 [sub_resource type="TileSet" id="TileSet_7dm0k"]
 tile_shape = 1
@@ -213,6 +233,7 @@ tile_size = Vector2i(32, 16)
 terrain_set_0/mode = 0
 sources/0 = SubResource("TileSetAtlasSource_0xm2m")
 sources/3 = SubResource("TileSetAtlasSource_kek77")
+sources/1 = SubResource("TileSetAtlasSource_muem4")
 
 [node name="Main" type="Node2D"]
 
