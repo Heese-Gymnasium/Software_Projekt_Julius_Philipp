@@ -4,6 +4,17 @@ var _x
 var _y
 
 
+var _units_glossar = {
+	"Soldat" : [100, 16, ["Hieb", "Schild"]],
+	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
+}
+
+var glossar = unit_glosssar.get
+
+var unit_glosssar:
+	get:
+		return _units_glossar
+
 var x:
 	get:
 		_x
@@ -15,24 +26,39 @@ var y:
 		_y
 	set(value):
 		_y = value
+		
+
+func _get_hp_base(unit_type):
+	return glossar[unit_type[0]]
+	
+	
+func _get_range_base(unit_type):
+	return glossar[unit_type[1]]
+	
+	
+func _get_skills_base(unit_type):
+	return glossar[unit_type[3]]
 
 
-func spawn(spawn_x, spawn_y):
+
+func _spawn(spawn_x, spawn_y):
 	var pos_x = spawn_x
 	var pos_y = spawn_y
-	print(pos_x)
-	print(pos_y)
-	$UnitPh.position = Vector2(pos_x, pos_y)
+	self.position = Vector2(pos_x, pos_y)
 	
-	#var iso_delta = Vector2(
-					#(dx / tile_width + dy / tile_height) * tile_width,
-					#(dy / tile_height - dx / tile_width) * tile_height
-				#)
-				
-#var world_x = (tile_x - tile_y) * (tile_size.x / 2.0)
-#var world_y = (tile_x + tile_y) * (tile_size.y / 2.0)
-#
-#var world_pos = Vector2(world_x, world_y)
+	
+	
+func _move_menu():
+	$Camera2d.align()
+	if InputEventMouseButton:
+		_move(4)
+	
+	
+func _move(range):
+	var tar_xy = Vector2($Highlight_Manager.tile_coords)
+	if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
+		_x = x
+		_y = y
 
 
 # Called when the node enters the scene tree for the first time.
