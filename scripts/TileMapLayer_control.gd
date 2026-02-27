@@ -35,6 +35,7 @@ var Map:
 					_Map[y[x]] = arr
 		else:
 			push_error("value for _Map.set must be of type: [x, y, [int, int],...] or same type as _Map: [ y: [x: [int, int] ]]")
+			# eine -7 im terraintyp (der 2te Wert des innersten Arrays) ändert den Wert nicht
 				
 func validate_packs(pack: Array) -> bool:
 	if pack.size() % 3 != 0:
@@ -88,7 +89,7 @@ func _initialize_Map(x, y):
 		
 func _add_unit(x, y, unit_type):
 	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
-		Map.set([x, y, [unit_type, 1]])
+		Map.set([x, y, [unit_type, -7]])
 		var trgt_unit = base_unit.instantiate()
 		self.add_child(trgt_unit)
 		var pos_x = (x - y) * tile_width / 2
