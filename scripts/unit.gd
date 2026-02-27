@@ -24,15 +24,15 @@ var y:
 		_y = value
 
 
-func _get_hp_base(unit_type):
+func get_hp_base(unit_type):
 	return _units_glossar.get([unit_type[0]])
 	
 
-func _get_range_base(unit_type):
+func get_range_base(unit_type):
 	return _units_glossar.get([unit_type[1]])
 	
 
-func _get_skills_base(unit_type):
+func get_skills_base(unit_type):
 	return _units_glossar.get([unit_type[2]])
 
 
@@ -52,7 +52,7 @@ func _move_menu():
 	
 func _move(unit_type):
 	var map_preview = $TileMapLayer.Map.get
-	var range = self._get_range_base(unit_type)
+	var range = self.get_range_base(unit_type)
 	var tar_xy = Vector2($Highlight_Manager.tile_coords)
 	if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
 		$TileMapLayer.Map.set([_x, _y, [0, -7]])
