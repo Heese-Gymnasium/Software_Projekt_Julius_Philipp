@@ -28,7 +28,53 @@ func on_turn_start():
 	cards_main_parent.hide()
 	main_active = 0
 
+func open_menue(unit):
+	var abiletys = get_abilitys(unit)
+	for abilety in abiletys:
+		var button := Button.new()
+		button.add_theme_color_override("font_color", Color("#009f8e"))
+		button.add_theme_color_override("font_focus_color", Color("#009f8e"))
+		button.add_theme_color_override("font_hover_color", Color.WHITE)
+		button.add_theme_color_override("font_pressed_color", Color.WHITE)
+		button.add_theme_color_override("font_disabled_color", Color.GRAY)
 
+		# Text
+		button.text = abilety.name
+		
+			# Mindestgröße
+		button.custom_minimum_size = Vector2(350, 40)
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+
+			
+		var spritesheet: Texture2D = preload("res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png")
+			
+			
+		var atlas := AtlasTexture.new()
+		atlas.atlas = spritesheet
+		atlas.region = Rect2(163, 178, 90, 27) # X, Y, Breite, Höhe
+			
+		var style := StyleBoxTexture.new()
+		style.texture = atlas
+
+			# Ränder (für Skalierung wichtig!)
+		style.set_texture_margin(SIDE_LEFT, 4)
+		style.set_texture_margin(SIDE_RIGHT, 4)
+		style.set_texture_margin(SIDE_TOP, 4)
+		style.set_texture_margin(SIDE_BOTTOM, 4)
+			
+		button.add_theme_stylebox_override("normal", style)
+
+			# Signal verbinden
+			#button.pressed.connect(_on_unit_button_pressed.bind(unit))
+
+		cards_main.add_child(button)
+	
+func _handle_button_impact_units(unit):
+	open_menue(unit)
+	unit_main_parent.show() 
+	cards_main_parent.hide()
+	main_active = 2
 func _on_units_pressed() -> void:
 	unit_main_parent.show() 
 	cards_main_parent.hide()
@@ -160,3 +206,10 @@ func get_cards(active_player):
 	{"name": "Card2", "cost": 70},
 	{"name": "Card3", "cost": 50}]
 	return cards
+func get_abilitys(unit):
+	var Glossar = {
+		"Soldat": ["rennen", "schlagen"],
+		"Magier": ["rennen", "eisball"]
+	}
+	
+	return Glossar[unit]
