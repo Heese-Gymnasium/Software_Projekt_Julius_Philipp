@@ -9,35 +9,31 @@ var _units_glossar = {
 	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
 }
 
-var glossar = _units_glossar.get
 
-var _unit_glosssar:
-	get:
-		return _units_glossar
 
 var x:
 	get:
 		_x
 	set(value):
 		_x = value
-		
+
 var y:
 	get:
 		_y
 	set(value):
 		_y = value
-		
 
-func _get_hp_base(unit_type):
-	return glossar[unit_type[0]]
+
+func get_hp_base(unit_type):
+	return _units_glossar.get([unit_type[0]])
 	
+
+func get_range_base(unit_type):
+	return _units_glossar.get([unit_type[1]])
 	
-func _get_range_base(unit_type):
-	return glossar[unit_type[1]]
-	
-	
-func _get_skills_base(unit_type):
-	return glossar[unit_type[3]]
+
+func get_skills_base(unit_type):
+	return _units_glossar.get([unit_type[2]])
 
 
 
@@ -54,11 +50,15 @@ func _move_menu():
 		_move(4)
 	
 	
-func _move(range):
+func _move(unit_type):
+	var map_preview = $TileMapLayer.Map.get
+	var range = self.get_range_base(unit_type)
 	var tar_xy = Vector2($Highlight_Manager.tile_coords)
 	if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
+		$TileMapLayer.Map.set([_x, _y, [0, -7]])
 		_x = x
 		_y = y
+		$TileMapLayer.Map.set([_x, _y, [unit_type, -7]])
 
 
 # Called when the node enters the scene tree for the first time.
