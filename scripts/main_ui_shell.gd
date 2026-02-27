@@ -3,8 +3,10 @@ extends MarginContainer
 @onready var main_active: int = 0
 @onready var unit_main := $ScrollContainer/VBoxContainer
 @onready var cards_main := $ScrollContainer2/Card_Container
+@onready var unit_objekt := $ScrollContainer3/Unit_object_Ui
 @onready var unit_main_parent := $ScrollContainer
 @onready var cards_main_parent := $ScrollContainer2
+@onready var unit := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_node("unit")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,7 +41,7 @@ func open_menue(unit):
 		button.add_theme_color_override("font_disabled_color", Color.GRAY)
 
 		# Text
-		button.text = abilety.name
+		button.text = abilety
 		
 			# Mindestgröße
 		button.custom_minimum_size = Vector2(350, 40)
@@ -68,7 +70,7 @@ func open_menue(unit):
 			# Signal verbinden
 			#button.pressed.connect(_on_unit_button_pressed.bind(unit))
 
-		cards_main.add_child(button)
+		unit_objekt.add_child(button)
 	
 func _handle_button_impact_units(unit):
 	open_menue(unit)
@@ -206,10 +208,6 @@ func get_cards(active_player):
 	{"name": "Card2", "cost": 70},
 	{"name": "Card3", "cost": 50}]
 	return cards
+
 func get_abilitys(unit):
-	var Glossar = {
-		"Soldat": ["rennen", "schlagen"],
-		"Magier": ["rennen", "eisball"]
-	}
-	
-	return Glossar[unit]
+	return unit.get_skills_base(unit)

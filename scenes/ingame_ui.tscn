@@ -129,6 +129,13 @@ script = ExtResource("6_uyn70")
 [node name="Card_Container" type="VBoxContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer2"]
 layout_mode = 2
 
+[node name="ScrollContainer3" type="ScrollContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+layout_mode = 2
+script = ExtResource("6_uyn70")
+
+[node name="Unit_object_Ui" type="VBoxContainer" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer3"]
+layout_mode = 2
+
 [node name="seperator" type="Control" parent="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui"]
 layout_mode = 2
 

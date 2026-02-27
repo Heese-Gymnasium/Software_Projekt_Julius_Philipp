@@ -9,9 +9,9 @@ var _units_glossar = {
 	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
 }
 
-var glossar = unit_glosssar.get
+var glossar = _units_glossar.get
 
-var unit_glosssar:
+var _unit_glosssar:
 	get:
 		return _units_glossar
 
