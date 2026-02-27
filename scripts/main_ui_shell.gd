@@ -6,7 +6,7 @@ extends MarginContainer
 @onready var unit_objekt := $ScrollContainer3/Unit_object_Ui
 @onready var unit_main_parent := $ScrollContainer
 @onready var cards_main_parent := $ScrollContainer2
-@onready var unit := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_node("unit")
+@onready var unit := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_node("trgt_unit")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

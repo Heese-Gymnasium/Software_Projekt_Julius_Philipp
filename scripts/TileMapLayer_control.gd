@@ -28,11 +28,11 @@ var Map:
 				var y = value[i+1]
 				var arr = value[i+2]
 				if(arr[1] == -7):
-					_Map[y[x[0]]] = arr[0]
+					_Map[y][x][0] = arr[0]
 				elif arr[0] == -7:
-					_Map[y[x[1]]] = arr[1]
+					_Map[y][x][1] = arr[1]
 				else:
-					_Map[y[x]] = arr
+					_Map[y][x] = arr
 		else:
 			push_error("value for _Map.set must be of type: [x, y, [int/String, int],...] or same type as _Map: [ y: [x: [int/String, int] ]]")
 			# eine -7 im terraintyp (der 2te Wert des innersten Arrays) ändert den Wert nicht
@@ -93,7 +93,7 @@ func _initialize_Map(x, y):
 
 func _add_unit(x, y, unit_type):
 	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
-		Map.set([x, y, [unit_type, -7]])
+		Map = [x, y, [unit_type, -7]]
 		var trgt_unit = base_unit.instantiate()
 		self.add_child(trgt_unit)
 		var pos_x = (x - y) * tile_width / 2
