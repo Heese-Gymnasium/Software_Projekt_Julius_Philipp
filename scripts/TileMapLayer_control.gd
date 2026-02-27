@@ -27,7 +27,12 @@ var Map:
 				var x = value[i]
 				var y = value[i+1]
 				var arr = value[i+2]
-				_Map[y[x]] = arr
+				if(arr[1] == -7):
+					_Map[y[x[0]]] = arr[0]
+				elif arr[0] == -7:
+					_Map[y[x[1]]] = arr[1]
+				else:
+					_Map[y[x]] = arr
 		else:
 			push_error("value for _Map.set must be of type: [x, y, [int, int],...] or same type as _Map: [ y: [x: [int, int] ]]")
 				
