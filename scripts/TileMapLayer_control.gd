@@ -83,7 +83,7 @@ func _initialize_Map(x, y):
 		
 func _add_unit(x, y, unit_type):
 	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
-		map_preview[y][x][0] = unit_type
+		Map.set([x, y, [unit_type, 1]])
 		var trgt_unit = base_unit.instantiate()
 		self.add_child(trgt_unit)
 		var pos_x = (x - y) * tile_width / 2

@@ -37,7 +37,7 @@ func _get_range_base(unit_type):
 	
 	
 func _get_skills_base(unit_type):
-	return glossar[unit_type[3]]
+	return glossar[unit_type[2]]
 
 
 
