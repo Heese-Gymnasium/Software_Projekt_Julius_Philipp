@@ -7,8 +7,8 @@ extends MarginContainer
 @onready var unit_main_parent := $ScrollContainer
 @onready var cards_main_parent := $ScrollContainer2
 @onready var unit_sub_menue := $ScrollContainer3
-@onready var unit := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_node("trgt_unit")
-
+@onready var unit := await self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(0)
+var id
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_parent().show()
@@ -31,48 +31,6 @@ func _on_turn_start():
 	cards_main_parent.hide()
 	unit_sub_menue.hide()
 	main_active = 0
-
-func _open_menue(unit):
-	var abiletys = _get_abilitys(unit)
-	for abilety in abiletys:
-		var button := Button.new()
-		button.add_theme_color_override("font_color", Color("#009f8e"))
-		button.add_theme_color_override("font_focus_color", Color("#009f8e"))
-		button.add_theme_color_override("font_hover_color", Color.WHITE)
-		button.add_theme_color_override("font_pressed_color", Color.WHITE)
-		button.add_theme_color_override("font_disabled_color", Color.GRAY)
-
-		# Text
-		button.text = abilety
-		
-			# Mindestgröße
-		button.custom_minimum_size = Vector2(350, 40)
-		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-
-			
-		var spritesheet: Texture2D = preload("res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png")
-			
-			
-		var atlas := AtlasTexture.new()
-		atlas.atlas = spritesheet
-		atlas.region = Rect2(163, 178, 90, 27) # X, Y, Breite, Höhe
-			
-		var style := StyleBoxTexture.new()
-		style.texture = atlas
-
-			# Ränder (für Skalierung wichtig!)
-		style.set_texture_margin(SIDE_LEFT, 4)
-		style.set_texture_margin(SIDE_RIGHT, 4)
-		style.set_texture_margin(SIDE_TOP, 4)
-		style.set_texture_margin(SIDE_BOTTOM, 4)
-			
-		button.add_theme_stylebox_override("normal", style)
-
-			# Signal verbinden
-			#button.pressed.connect(_on_unit_button_pressed.bind(unit))
-
-		unit_objekt.add_child(button)
 	
 func _handle_button_impact_units(unit):
 	unit_main_parent.hide() 
@@ -119,13 +77,15 @@ func _get_cards(active_player):
 	return cards
 
 func _get_abilitys(unit):
-	# return unit.get_skills_base(unit)
-	return ["test1", "test2"]
+	return unit.get_skills_base(unit)
+	#return ["test1", "test2"]
 	
 
 func _create_buttons(target, objekts):
 	if(objekts is Dictionary):
+		id = objekts
 		objekts = _get_abilitys(objekts)
+
 	target.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	target.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	
@@ -182,7 +142,11 @@ func _create_buttons(target, objekts):
 		target.add_child(button)
 	
 func _handel_sub_input(objekt):
-	if(objekt.has("hp")):
+	if(objekt is String):
+		_activate_action(objekt)
+	elif(objekt.has("hp")):
 		_handle_button_impact_units(objekt)
 	elif(objekt.has("cost")):
 		pass
+func _activate_action(action):
+	pass
