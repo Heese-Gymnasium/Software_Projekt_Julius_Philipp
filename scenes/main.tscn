@@ -353,6 +353,18 @@ script = ExtResource("11_0ld40")
 [node name="Card_Container" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer2"]
 layout_mode = 2
 
+[node name="ScrollContainer3" type="ScrollContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell"]
+custom_minimum_size = Vector2(750, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("11_0ld40")
+
+[node name="Unit_object_Ui" type="VBoxContainer" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell/ScrollContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
 [node name="seperator" type="Control" parent="CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui"]
 layout_mode = 2
 
