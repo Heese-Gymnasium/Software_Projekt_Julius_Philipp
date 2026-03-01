@@ -93,13 +93,16 @@ func _initialize_Map(x, y):
 
 func _add_unit(x, y, unit_type):
 	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
-		Map = [x, y, [unit_type, -7]]
-		var trgt_unit = base_unit.instantiate()
-		self.add_child(trgt_unit)
-		var pos_x = (x - y) * tile_width / 2
-		var pos_y = (x + y) * tile_height / 2
-		trgt_unit._spawn(pos_x, pos_y)
-		units.append({"name" : unit_type, "hp" : trgt_unit.get_hp_base(unit_type)})
+		if(Map[y[x[0]]] == 0): # x und y vertauscht, da die x in y gespeichert sind
+			Map = [x, y, [unit_type, -7]]
+			var trgt_unit = base_unit.instantiate()
+			self.add_child(trgt_unit)
+			var pos_x = (x - y) * tile_width / 2
+			var pos_y = (x + y) * tile_height / 2
+			trgt_unit._spawn(pos_x, pos_y)
+			units.append({"name" : unit_type, "hp" : trgt_unit.get_hp_base(unit_type)})
+		else:
+			push_error("space occupied")
 	else:
 		push_error("unit placed in Void")
 

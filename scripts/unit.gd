@@ -55,7 +55,7 @@ func _spawn(spawn_x, spawn_y):
 func _move_menu():
 	$Camera2d.align()
 	if InputEventMouseButton:
-		_move(4)
+		_move($TileMapLayer.Map[y[x[0]]])
 	
 	
 func _move(unit_type):
