@@ -48,7 +48,6 @@ func _input(event: InputEvent) -> void:
 				highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
 				highlight_map.set_cell(Tile_old, source_id, Vector2i(3, 1))
 				Tile_old = Tile
-			
 func _evaluate_Tile():
 	var Map = tileMapLayer.Map.get()
 	var x = Tile.x
@@ -56,5 +55,7 @@ func _evaluate_Tile():
 	var cell = Map[y][x]
 	if cell[0] != 0:
 		_unit_action(cell)
+
+
 func _unit_action(cell):
 	pass

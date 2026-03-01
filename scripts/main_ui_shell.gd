@@ -84,7 +84,6 @@ func _get_abilitys(unit):
 		return target.get_skills_base("Soldat")
 	else:
 		return["Objekt non existant"]
-	
 
 func _create_buttons(target, objekts):
 	if(objekts is Dictionary):
