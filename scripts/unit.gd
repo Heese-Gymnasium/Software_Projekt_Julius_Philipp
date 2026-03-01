@@ -25,15 +25,23 @@ var y:
 
 
 func get_hp_base(unit_type):
-	return _units_glossar.get([unit_type[0]])
+	if _units_glossar.has(unit_type):
+		return _units_glossar[unit_type][0]
+	return null
 	
 
 func get_range_base(unit_type):
-	return _units_glossar.get([unit_type[1]])
+	if _units_glossar.has(unit_type):
+		return _units_glossar.get(unit_type)[1]
+	return null
+
 	
 
 func get_skills_base(unit_type):
-	return _units_glossar.get([unit_type[2]])
+	if _units_glossar.has(unit_type):
+		return _units_glossar.get(unit_type)[2]
+	return null
+
 
 
 

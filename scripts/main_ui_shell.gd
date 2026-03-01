@@ -7,7 +7,6 @@ extends MarginContainer
 @onready var unit_main_parent := $ScrollContainer
 @onready var cards_main_parent := $ScrollContainer2
 @onready var unit_sub_menue := $ScrollContainer3
-@onready var unit := await self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(0)
 var id
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -77,8 +76,9 @@ func _get_cards(active_player):
 	return cards
 
 func _get_abilitys(unit):
-	return unit.get_skills_base(unit)
-	#return ["test1", "test2"]
+	var target := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(0)
+	unit = unit.name
+	return target.get_skills_base("Soldat")
 	
 
 func _create_buttons(target, objekts):
