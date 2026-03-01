@@ -36,7 +36,7 @@ func _input(event):
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			right_mouse_down = event.pressed
 	elif event is InputEventMouseMotion:
-		if right_mouse_down:
+		if right_mouse_down and self.get_child(0).allow_zoom == true:
 			global_position -= event.relative
 
 

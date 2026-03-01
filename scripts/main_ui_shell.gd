@@ -15,6 +15,8 @@ func _ready() -> void:
 	_on_turn_start()
 
 
+		
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -150,6 +152,9 @@ func _handel_sub_input(objekt, id = 0):
 	elif(objekt.has("hp")):
 		_handle_button_impact_units(objekt)
 	elif(objekt.has("cost")):
-		pass
+		_activate_card(objekt)
+
 func _activate_action(action):
+	pass
+func _activate_card(Card):
 	pass
