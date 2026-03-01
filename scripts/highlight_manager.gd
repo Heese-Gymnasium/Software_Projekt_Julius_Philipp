@@ -14,7 +14,6 @@ const render_offset := Vector2i(-1, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
 	highlight_map = self.get_parent().get_node("Highligth_Map")
 	tileMapLayer = self.get_parent().get_node("TileMapLayer")
 	mouse_old_pos = get_global_mouse_position() 
@@ -50,4 +49,12 @@ func _input(event: InputEvent) -> void:
 				highlight_map.set_cell(Tile_old, source_id, Vector2i(3, 1))
 				Tile_old = Tile
 			
-	
+func _evaluate_Tile():
+	var Map = tileMapLayer.Map.get()
+	var x = Tile.x
+	var y = Tile.y
+	var cell = Map[y][x]
+	if cell[0] != 0:
+		_unit_action(cell)
+func _unit_action(cell):
+	pass

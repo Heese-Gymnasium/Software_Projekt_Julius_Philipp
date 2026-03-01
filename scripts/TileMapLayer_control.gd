@@ -35,7 +35,7 @@ var Map:
 					_Map[y][x] = arr
 		else:
 			push_error("value for _Map.set must be of type: [x, y, [int/String, int],...] or same type as _Map: [ y: [x: [int/String, int] ]]")
-			# eine -7 im terraintyp (der 2te Wert des innersten Arrays) ändert den Wert nicht
+		# eine -7 ändert den Wert nicht
 				
 func validate_packs(pack: Array) -> bool:
 	if pack.size() % 3 != 0:
