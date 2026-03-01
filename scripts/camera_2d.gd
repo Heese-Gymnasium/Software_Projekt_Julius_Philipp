@@ -37,3 +37,11 @@ func _on_scroll_container_mouse_entered() -> void:
 
 func _on_margin_container_mouse_entered() -> void:
 	allow_zoom = true
+
+
+func _on_scroll_container_2_mouse_entered() -> void:
+	allow_zoom = false
+
+
+func _on_scroll_container_3_mouse_entered() -> void:
+	allow_zoom = false

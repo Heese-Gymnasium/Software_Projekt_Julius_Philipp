@@ -83,24 +83,6 @@ func _process(delta):
 		elif mouse_pos.y >= viewport_size.y - edge_size:
 			speed_factor_y = 1.0 - ((viewport_size.y - mouse_pos.y) / edge_size)
 			movement.y += speed_factor_y
-	#elif right_mouse_down:
-		#if not alt_pos == mouse_pos:
-				#var mouse_delta = mouse_pos - alt_pos
-				#
-				#var tile_width := 32.0
-				#var tile_height := 16.0
-#
-				#var dx = mouse_delta.x
-				#var dy = mouse_delta.y
-				## Iso-Umrechnung
-				#var iso_delta = Vector2(
-					#(dx / tile_width + dy / tile_height) * tile_width,
-					#(dy / tile_height - dx / tile_width) * tile_height
-				#) * drag_speed
-				#position -= iso_delta
-		#alt_pos = mouse_pos
-
-
 
 	if movement != Vector2.ZERO:
 		position += movement.normalized() * max_speed * delta * movement.length()

@@ -57,7 +57,7 @@ func get_active_player() -> int:
 
 func _get_units(active_player):
 	var units = [
-	{"name": "Soldat", "hp": 100},
+	{"name": "Soldat", "hp": 100, "idx": 0},
 	{"name": "Bogenschütze", "hp": 70},
 	{"name": "Magier", "hp": 50},
 	{"name": "Soldat", "hp": 100},
@@ -76,9 +76,12 @@ func _get_cards(active_player):
 	return cards
 
 func _get_abilitys(unit):
-	var target := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(0)
-	unit = unit.name
-	return target.get_skills_base("Soldat")
+	if(unit.has("idx")):
+		var target := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(unit.idx)
+		unit = unit.name
+		return target.get_skills_base("Soldat")
+	else:
+		return["Objekt non existant"]
 	
 
 func _create_buttons(target, objekts):
@@ -135,13 +138,13 @@ func _create_buttons(target, objekts):
 		style.set_texture_margin(SIDE_BOTTOM, 4)
 		
 		button.add_theme_stylebox_override("normal", style)
-
-		# Signal verbinden
-		#button.pressed.connect(_on_unit_button_pressed.bind(unit))
-		button.pressed.connect(_handel_sub_input.bind(objekt))
+		if(objekt is String):
+			button.pressed.connect(_handel_sub_input.bind(objekt, id))
+		else:
+			button.pressed.connect(_handel_sub_input.bind(objekt))
 		target.add_child(button)
 	
-func _handel_sub_input(objekt):
+func _handel_sub_input(objekt, id = 0):
 	if(objekt is String):
 		_activate_action(objekt)
 	elif(objekt.has("hp")):
