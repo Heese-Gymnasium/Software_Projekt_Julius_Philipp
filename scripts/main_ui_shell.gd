@@ -7,7 +7,6 @@ extends MarginContainer
 @onready var unit_main_parent := $ScrollContainer
 @onready var cards_main_parent := $ScrollContainer2
 @onready var unit_sub_menue := $ScrollContainer3
-var id
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_parent().show()
@@ -86,8 +85,10 @@ func _get_abilitys(unit):
 		return["Objekt non existant"]
 
 func _create_buttons(target, objekts):
+	var id
 	if(objekts is Dictionary):
-		id = objekts
+		if(objekts.has("idx")):
+			id = objekts.idx
 		objekts = _get_abilitys(objekts)
 
 	target.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -96,7 +97,6 @@ func _create_buttons(target, objekts):
 	# Alte Buttons löschen (falls Units sich ändern)
 	for child in target.get_children():
 		child.queue_free()
-
 	for objekt in objekts:
 		var button := Button.new()
 		button.add_theme_color_override("font_color", Color("#009f8e"))
@@ -147,13 +147,13 @@ func _create_buttons(target, objekts):
 	
 func _handel_sub_input(objekt, id = 0):
 	if(objekt is String):
-		_activate_action(objekt)
+		_activate_action(objekt, id)
 	elif(objekt.has("hp")):
 		_handle_button_impact_units(objekt)
 	elif(objekt.has("cost")):
 		_activate_card(objekt)
 
-func _activate_action(action):
-	pass
+func _activate_action(action, id):
+	print(id)
 func _activate_card(Card):
 	pass
