@@ -93,7 +93,7 @@ func _initialize_Map(x, y):
 
 func _add_unit(x, y, unit_type):
 	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
-		if(Map[y[x[0]]] == 0): # x und y vertauscht, da die x in y gespeichert sind
+		if(Map[y][x][0] == 0): # x und y vertauscht, da die x in y gespeichert sind
 			Map = [x, y, [unit_type, -7]]
 			var trgt_unit = base_unit.instantiate()
 			self.add_child(trgt_unit)
