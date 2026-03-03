@@ -3,8 +3,6 @@ extends Node2D
 
 var units = []
 
-var tile_map := self.get_parent()
-
 
 func _add_unit(x, y, unit_type):
 	if(x <= get_parent().Map_x && y <= get_parent().Map_y && x >= 0 && y >= 0):
