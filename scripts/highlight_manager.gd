@@ -1,5 +1,8 @@
 extends Node2D
 
+var drange
+var dPos
+var highligthet: Array
 var Tile
 var Tile_old
 var tile_coords:
@@ -32,18 +35,28 @@ func _process(delta: float) -> void:
 		highlight_map.set_cell(tile_coords, source_id, atlas_coords)
 	if tile_coords != tile_coords_old:
 		atlas_coords = Vector2i(3, 1)
-		if tile_coords_old != Tile:
+		if (tile_coords_old != Tile):
 			highlight_map.set_cell(tile_coords_old, source_id, atlas_coords)
+		if (highligthet.has(tile_coords_old)):
+			highlight_map.set_cell(tile_coords_old, source_id, Vector2i(1, 0))
 		tile_coords_old = tile_coords
 	mouse_old_pos = mouse_pos
 
 
 func _input(event: InputEvent) -> void:
 	if(event is InputEventMouseButton):
+		var m = false
 		if(event.button_index == MOUSE_BUTTON_LEFT):
+			if highligthet != []:
+				m = true
 			var mouse_pos := get_global_mouse_position()
 			var local_pos : Vector2 = tileMapLayer.to_local(mouse_pos)
 			Tile = tileMapLayer.local_to_map(local_pos) + render_offset
+			if m :
+				if highligthet.has(Tile):
+					_action_return(Tile)
+				attack_highlight_delete()
+				
 			if Tile != Tile_old:
 				highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
 				highlight_map.set_cell(Tile_old, source_id, Vector2i(3, 1))
@@ -61,25 +74,34 @@ func _unit_action(cell):
 	pass
 
 func attack_highlight(range, pos):
+	dPos = pos
+	drange = range
 	for x in range(pos.x - range, pos.x + range + 1):
-		for y in range(pos.y - range, pos.y + range + 1):
+		for y in range(pos.y - range, pos.y + range + 2):
 			var p = Vector2i(x, y)
 
-			var dx = p.x - pos.x
-			var dy = p.y - pos.y
+			var dx = p.x - pos.x 
+			var dy = p.y - pos.y -1
 
 			# Euklidische Distanz (Kreis)
 			if dx * dx + dy * dy <= range * range:
+				highligthet.append(p)
 				highlight_map.set_cell(p, source_id, Vector2i(1, 0))
-func attack_highlight_delete(range, pos):
-	print("attack")
+func attack_highlight_delete():
+	var range = drange
+	var pos = dPos
 	for x in range(pos.x - range, pos.x + range + 1):
-		for y in range(pos.y - range, pos.y + range + 1):
+		for y in range(pos.y - range, pos.y + range + 2):
 			var p = Vector2i(x, y)
-			print(p)
-			var dx = p.x - pos.x
-			var dy = p.y - pos.y
+
+			var dx = p.x - pos.x 
+			var dy = p.y - pos.y - 1
 
 			# Euklidische Distanz (Kreis)
 			if dx * dx + dy * dy <= range * range:
-				highlight_map.set_cell(p, source_id, Vector2i(3, 1))  # dein Highlight-Tile
+				highligthet.erase(p)
+				highlight_map.set_cell(p, source_id, Vector2i(3, 1))
+
+
+func _action_return(Tile):
+	pass
