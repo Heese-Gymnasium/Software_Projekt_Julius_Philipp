@@ -5,12 +5,6 @@ var _y
 
 var protected = 0
 
-var _units_glossar = {
-	"Soldat" : [100, 16, ["Hieb", "Schild"]],
-	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
-}
-
-
 
 var x:
 	get:
@@ -24,24 +18,6 @@ var y:
 	set(value):
 		_y = value
 
-
-func get_hp_base(unit_type):
-	if _units_glossar.has(unit_type):
-		return _units_glossar[unit_type][0]
-	return null
-	
-
-func get_range_base(unit_type):
-	if _units_glossar.has(unit_type):
-		return _units_glossar.get(unit_type)[1]
-	return null
-
-	
-
-func get_skills_base(unit_type):
-	if _units_glossar.has(unit_type):
-		return _units_glossar.get(unit_type)[2]
-	return null
 
 
 
@@ -60,7 +36,7 @@ func _spawn(spawn_x, spawn_y):
 
 
 func _handle_action(action, unit_type):
-	var actions = self.get_skills_base(unit_type)
+	var actions = get_parent().get_skills_base(unit_type)
 	if actions.has(action):
 		if(action == "Hieb"):
 			self._hieb
@@ -94,7 +70,7 @@ func _die():
 
 func _move(unit_type):
 	var map_preview = get_node("/root/Main/root_tile/TileMapLayer").Map.get
-	var range = self.get_range_base(unit_type)
+	var range = get_parent().get_range_base(unit_type)
 	var tar_xy = Vector2(get_node("/root/Main/root_tile/TileMapLayer").tile_coords)
 	if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
 		get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [0, -7]])
