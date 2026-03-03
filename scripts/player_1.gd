@@ -98,9 +98,19 @@ func _add_card_to_deck(card):
 func _draw_cards(amount):
 	var rng = RandomNumberGenerator.new()
 	for i in range(amount):
-		if(i <= _deck.size()):
+		if(_deck.size() > 0):
 			var card = rng.randi_range(0, _deck.size())
 			_hand.append(_deck[card])
+		elif(_discard.size() > 0):
+			self._shuffle_discard_to_deck()
+		else:
+			push_error("deck empty")
+
+func _shuffle_discard_to_deck():
+	_deck.append_array(_discard)
+	_discard.clear()
+
+
 
 
 # Called when the node enters the scene tree for the first time.

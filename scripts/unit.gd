@@ -3,7 +3,6 @@ extends Node
 var _x
 var _y
 
-var tile_coords = Vector2i(_x, _y) 
 
 var protected = 0
 
@@ -50,19 +49,22 @@ func _handle_action(action, unit_type):
 			self._feuerball
 
 
-var highlight_manager = get_tree().root.get_node("Main/root_tile/Highlight_Manager")
+
 
 func _hieb():
-	highlight_manager.attack_highlight(2, tile_coords)
+	var tile_coords = Vector2i(_x, _y)
+	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(2, tile_coords)
 
 func _schild():
 	protected += 1
 
 func _eisspeer():
-	highlight_manager.attack_highlight(12, tile_coords)
+	var tile_coords = Vector2i(_x, _y)
+	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(12, tile_coords)
 
 func _feuerball():
-	highlight_manager.attack_highlight(15, tile_coords)
+	var tile_coords = Vector2i(_x, _y)
+	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(15, tile_coords)
 
 
 func _die():
@@ -71,15 +73,22 @@ func _die():
 
 
 func _move(unit_type):
-	var map_preview = get_node("/root/Main/root_tile/TileMapLayer").Map.get
-	var range = get_parent().get_range_base(unit_type)
-	var tar_xy = Vector2(get_node("/root/Main/root_tile/TileMapLayer").tile_coords)
-	if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
-		get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [0, -7]])
-		_x = x
-		_y = y
-		get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [unit_type, -7]])
-
+	if(x <= get_parent().Map_x && y <= get_parent().Map_y && x >= 0 && y >= 0):
+		if(get_parent().Map[y][x][0] == 0):
+			var map_preview = get_node("/root/Main/root_tile/TileMapLayer").Map.get
+			var range = get_parent().get_range_base(unit_type)
+			var tar_xy = Vector2(get_node("/root/Main/root_tile/TileMapLayer").tile_coords)
+			if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
+				get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [0, -7]])
+				_x = x
+				_y = y
+				get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [unit_type, -7]])
+			else:
+				push_error("outside of range")
+		else:
+			push_error("space occupied")
+	else:
+		push_error("cant move in void")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
