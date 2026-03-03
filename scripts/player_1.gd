@@ -73,7 +73,7 @@ func action(idx, action):
 		else:
 			push_error("unit doesnt exist")
 	var child_name = "unit_%d" % idx
-	var unit = self.find_child(child_name)
+	var unit = self.get_node(child_name)
 	unit._handle_action(action, type)
 
 

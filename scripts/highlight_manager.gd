@@ -70,12 +70,13 @@ func attack_highlight(range, pos):
 
 			# Euklidische Distanz (Kreis)
 			if dx * dx + dy * dy <= range * range:
-				highlight_map.set_cell(p, source_id, Vector2i(1, 0))  # dein Highlight-Tile
+				highlight_map.set_cell(p, source_id, Vector2i(1, 0))
 func attack_highlight_delete(range, pos):
+	print("attack")
 	for x in range(pos.x - range, pos.x + range + 1):
 		for y in range(pos.y - range, pos.y + range + 1):
 			var p = Vector2i(x, y)
-
+			print(p)
 			var dx = p.x - pos.x
 			var dy = p.y - pos.y
 

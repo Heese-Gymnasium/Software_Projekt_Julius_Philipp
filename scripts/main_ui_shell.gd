@@ -146,7 +146,10 @@ func _handel_sub_input(objekt, id = 0):
 		_activate_card(objekt)
 
 func _activate_action(action, id):
+	var target := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(active_player)
+	target.action(id, action)
 	print(id)
+
 func _activate_card(Card):
 	pass
 
