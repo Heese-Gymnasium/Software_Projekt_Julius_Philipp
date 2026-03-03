@@ -59,3 +59,26 @@ func _evaluate_Tile():
 
 func _unit_action(cell):
 	pass
+
+func attack_highlight(range, pos):
+	for x in range(pos.x - range, pos.x + range + 1):
+		for y in range(pos.y - range, pos.y + range + 1):
+			var p = Vector2i(x, y)
+
+			var dx = p.x - pos.x
+			var dy = p.y - pos.y
+
+			# Euklidische Distanz (Kreis)
+			if dx * dx + dy * dy <= range * range:
+				highlight_map.set_cell(p, source_id, Vector2i(1, 0))  # dein Highlight-Tile
+func attack_highlight_delete(range, pos):
+	for x in range(pos.x - range, pos.x + range + 1):
+		for y in range(pos.y - range, pos.y + range + 1):
+			var p = Vector2i(x, y)
+
+			var dx = p.x - pos.x
+			var dy = p.y - pos.y
+
+			# Euklidische Distanz (Kreis)
+			if dx * dx + dy * dy <= range * range:
+				highlight_map.set_cell(p, source_id, Vector2i(3, 1))  # dein Highlight-Tile
