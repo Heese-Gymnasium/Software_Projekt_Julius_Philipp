@@ -1,5 +1,5 @@
 extends Node2D
-
+var ui_interact_allowence : bool = true
 var drange
 var dPos
 var highligthet: Array
@@ -54,8 +54,8 @@ func _input(event: InputEvent) -> void:
 			Tile = tileMapLayer.local_to_map(local_pos) + render_offset
 			if m :
 				if highligthet.has(Tile):
-					_action_return(Tile)
-				attack_highlight_delete()
+					_action_return()
+				_attack_highlight_delete()
 				
 			if Tile != Tile_old:
 				highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
@@ -87,7 +87,7 @@ func attack_highlight(range, pos):
 			if dx * dx + dy * dy <= range * range:
 				highligthet.append(p)
 				highlight_map.set_cell(p, source_id, Vector2i(1, 0))
-func attack_highlight_delete():
+func _attack_highlight_delete():
 	var range = drange
 	var pos = dPos
 	for x in range(pos.x - range, pos.x + range + 1):
@@ -103,5 +103,7 @@ func attack_highlight_delete():
 				highlight_map.set_cell(p, source_id, Vector2i(3, 1))
 
 
-func _action_return(Tile):
-	pass
+func _action_return():
+	var active_player = get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").get_active_player()
+	var t = get_parent().get_node("TileMapLayer").get_child(active_player)
+	t.finish_attack(Tile)

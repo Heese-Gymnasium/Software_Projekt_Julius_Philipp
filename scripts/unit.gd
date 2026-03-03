@@ -53,9 +53,7 @@ func _handle_action(action, unit_type):
 
 func _hieb():
 	var tile_coords = Vector2i(_x, _y)
-	print(tile_coords)
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(2, tile_coords)
-	print("xd")
 
 func _schild():
 	protected += 1

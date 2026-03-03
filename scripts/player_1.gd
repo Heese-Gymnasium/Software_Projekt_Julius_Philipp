@@ -89,8 +89,8 @@ func lose_hp(value, idx):
 					child._die()
 
 
-func _finish_attack(trgt_coords):
-	pass
+func finish_attack(trgt_coords):
+	print("Hallo")
 
 
 func _add_card_to_deck(card):

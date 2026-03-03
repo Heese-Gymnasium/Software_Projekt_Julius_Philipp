@@ -34,9 +34,11 @@ func _on_scroll_container_mouse_exited() -> void:
 
 func _on_scroll_container_mouse_entered() -> void:
 	allow_zoom = false 
+	get_tree().root.get_node("Main/root_tile/Highlight_Manager").ui_interact_allowence = false 
 
 func _on_margin_container_mouse_entered() -> void:
 	allow_zoom = true
+	get_tree().root.get_node("Main/root_tile/Highlight_Manager").ui_interact_allowence = true
 
 
 func _on_scroll_container_2_mouse_entered() -> void:
