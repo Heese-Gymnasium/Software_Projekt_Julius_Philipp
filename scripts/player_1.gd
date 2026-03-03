@@ -36,6 +36,8 @@ func _add_unit(x, y, unit_type):
 			var pos_y = (x + y) * get_parent().tile_height / 2
 			trgt_unit._spawn(pos_x, pos_y)
 			units.append({"name" : unit_type, "hp" : get_hp_base(unit_type), "idx" : id})
+			await get_tree().process_frame
+			get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").change_units(units)
 		else:
 			push_error("space occupied")
 	else:
