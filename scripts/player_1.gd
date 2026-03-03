@@ -16,8 +16,15 @@ func _add_unit(x, y, unit_type):
 			get_parent().Map = [x, y, [unit_type, -7]]
 			var id = get_parent()._assign_id()
 			var trgt_unit = get_parent().base_unit.instantiate()
+	if(x <= get_parent().Map_x && y <= get_parent().Map_y && x >= 0 && y >= 0):
+		if(get_parent().Map[y][x][0] == 0): # x und y vertauscht, da die x in y gespeichert sind
+			get_parent().Map = [x, y, [unit_type, -7]]
+			var id = get_parent()._assign_id()
+			var trgt_unit = get_parent().base_unit.instantiate()
 			trgt_unit.name = "unit_%d" % id
 			self.add_child(trgt_unit)
+			var pos_x = (x - y) * get_parent().tile_width / 2
+			var pos_y = (x + y) * get_parent().tile_height / 2
 			var pos_x = (x - y) * get_parent().tile_width / 2
 			var pos_y = (x + y) * get_parent().tile_height / 2
 			trgt_unit._spawn(pos_x, pos_y)
