@@ -3,6 +3,7 @@ extends Node
 var _x
 var _y
 
+var protected = 0
 
 var _units_glossar = {
 	"Soldat" : [100, 16, ["Hieb", "Schild"]],
@@ -49,24 +50,57 @@ func _spawn(spawn_x, spawn_y):
 	var pos_x = spawn_x
 	var pos_y = spawn_y
 	self.position = Vector2(pos_x, pos_y)
-	
-	
-	
-func _move_menu():
-	$Camera2d.align()
-	if InputEventMouseButton:
-		_move($TileMapLayer.Map[y[x[0]]])
-	
-	
+
+
+
+#func _move_menu():
+	#$Camera2d.align()
+	#if InputEventMouseButton:
+		#_move($TileMapLayer.Map[y[x[0]]])
+
+
+func _handle_action(action, unit_type):
+	var actions = self.get_skills_base(unit_type)
+	if actions.has(action):
+		if(action == "Hieb"):
+			self._hieb
+		if(action == "Schild"):
+			self._schild
+		if(action == "Eisspeer"):
+			self._eisspeer
+		if(action == "Feuerball"):
+			self._feuerball
+
+
+
+
+func _hieb():
+	$Highlight.attack_highlight(1)
+
+func _schild():
+	protected += 1
+
+func _eisspeer():
+	$Highlight.attack_highlight(4)
+
+func _feuerball():
+	$Highlight.attack_highlight(6)
+
+
+func _die():
+	self.queue_free()
+
+
+
 func _move(unit_type):
-	var map_preview = $TileMapLayer.Map.get
+	var map_preview = get_node("/root/Main/root_tile/TileMapLayer").Map.get
 	var range = self.get_range_base(unit_type)
-	var tar_xy = Vector2($Highlight_Manager.tile_coords)
+	var tar_xy = Vector2(get_node("/root/Main/root_tile/TileMapLayer").tile_coords)
 	if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
-		$TileMapLayer.Map.set([_x, _y, [0, -7]])
+		get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [0, -7]])
 		_x = x
 		_y = y
-		$TileMapLayer.Map.set([_x, _y, [unit_type, -7]])
+		get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [unit_type, -7]])
 
 
 # Called when the node enters the scene tree for the first time.

@@ -9,9 +9,10 @@ extends Node
 @onready var tile_height = self.tile_set.tile_size.y
 
 
+
 var map_preview = []
 
-var units = []
+var next_unit_id = 0
 
 var base_unit = load("res://scenes/unit.tscn")
 
@@ -91,25 +92,17 @@ func _initialize_Map(x, y):
 	Map = map_preview
 
 
-func _add_unit(x, y, unit_type):
-	if(x <= Map_x && y <= Map_y && x >= 0 && y >= 0):
-		if(Map[y][x][0] == 0): # x und y vertauscht, da die x in y gespeichert sind
-			Map = [x, y, [unit_type, -7]]
-			var trgt_unit = base_unit.instantiate()
-			self.add_child(trgt_unit)
-			var pos_x = (x - y) * tile_width / 2
-			var pos_y = (x + y) * tile_height / 2
-			trgt_unit._spawn(pos_x, pos_y)
-			units.append({"name" : unit_type, "hp" : trgt_unit.get_hp_base(unit_type)})
-		else:
-			push_error("space occupied")
-	else:
-		push_error("unit placed in Void")
+func _assign_id():
+	var id = next_unit_id
+	next_unit_id += 1
+	return id
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_initialize_Map(Map_x, Map_y)
-	_add_unit(1, 1, "base")
+	$player1._add_unit(1, 1, "base")
 	pass # Replace with function body.
 
 
