@@ -25,8 +25,6 @@ func _add_unit(x, y, unit_type):
 			self.add_child(trgt_unit)
 			var pos_x = (x - y) * get_parent().tile_width / 2
 			var pos_y = (x + y) * get_parent().tile_height / 2
-			var pos_x = (x - y) * get_parent().tile_width / 2
-			var pos_y = (x + y) * get_parent().tile_height / 2
 			trgt_unit._spawn(pos_x, pos_y)
 			units.append({"name" : unit_type, "hp" : trgt_unit.get_hp_base(unit_type), "idx" : id})
 		else:
