@@ -1,27 +1,52 @@
 extends Node2D
 
 
-var units = []
 
-var tile_map = get_parent()
+var _units_glossar = {
+	"Soldat" : [100, 16, ["Hieb", "Schild"]],
+	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
+}
+
+var units = []
 
 
 func _add_unit(x, y, unit_type):
-	if(x <= tile_map.Map_x && y <= tile_map.Map_y && x >= 0 && y >= 0):
-		if(tile_map.Map[y][x][0] == 0): # x und y vertauscht, da die x in y gespeichert sind
-			tile_map.Map = [x, y, [unit_type, -7]]
-			var id = tile_map._assign_id()
-			var trgt_unit = tile_map.base_unit.instantiate()
+	if(x <= get_parent().Map_x && y <= get_parent().Map_y && x >= 0 && y >= 0):
+		if(get_parent().Map[y][x][0] == 0): # x und y vertauscht, da die x in y gespeichert sind
+			get_parent().Map = [x, y, [unit_type, -7]]
+			var id = get_parent()._assign_id()
+			var trgt_unit = get_parent().base_unit.instantiate()
 			trgt_unit.name = "unit_%d" % id
 			self.add_child(trgt_unit)
-			var pos_x = (x - y) * tile_map.tile_width / 2
-			var pos_y = (x + y) * tile_map.tile_height / 2
+			var pos_x = (x - y) * get_parent().tile_width / 2
+			var pos_y = (x + y) * get_parent().tile_height / 2
 			trgt_unit._spawn(pos_x, pos_y)
 			units.append({"name" : unit_type, "hp" : trgt_unit.get_hp_base(unit_type), "idx" : id})
 		else:
 			push_error("space occupied")
 	else:
 		push_error("unit placed in Void")
+
+
+
+func get_hp_base(unit_type):
+	if _units_glossar.has(unit_type):
+		return _units_glossar[unit_type][0]
+	return null
+
+
+func get_range_base(unit_type):
+	if _units_glossar.has(unit_type):
+		return _units_glossar.get(unit_type)[1]
+	return null
+
+
+
+func get_skills_base(unit_type):
+	if _units_glossar.has(unit_type):
+		return _units_glossar.get(unit_type)[2]
+	return null
+
 
 
 func _action(idx, action):
@@ -34,6 +59,8 @@ func _action(idx, action):
 	var child_name = "unit_%d" % idx
 	var unit = self.find_child(child_name)
 	unit._handle_action(action, type)
+
+
 
 
 func _lose_hp(value, idx):
