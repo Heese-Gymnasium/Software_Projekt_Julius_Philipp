@@ -1,13 +1,22 @@
 extends Node2D
 
 
-
-var _units_glossar = {
-	"Soldat" : [100, 16, ["Hieb", "Schild"]],
-	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
+var _cards_glossar = {
+	"Soldat beschwören" : 1, 
+	"Magier beschwören" : 1
 }
 
-var units = []
+
+var _units_glossar = {
+	"Soldat" : [100, 16, ["Hieb", "Schild"]],  
+	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
+}   #name(unit_type) : [hp, move range, [skills]]
+
+var units = []:
+	get:
+		return units
+
+
 
 
 func _add_unit(x, y, unit_type):
