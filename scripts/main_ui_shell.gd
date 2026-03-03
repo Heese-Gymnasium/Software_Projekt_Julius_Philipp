@@ -7,6 +7,7 @@ extends MarginContainer
 @onready var unit_main_parent := $ScrollContainer
 @onready var cards_main_parent := $ScrollContainer2
 @onready var unit_sub_menue := $ScrollContainer3
+@onready var active_player = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_parent().show()
@@ -22,7 +23,6 @@ func _process(delta: float) -> void:
 
 
 func _on_turn_start():
-	var active_player = get_active_player()
 	var cards = _get_cards(active_player)
 	_create_buttons(cards_main, cards)
 	var units = _get_units(active_player)
@@ -54,7 +54,7 @@ func _on_cards_pressed() -> void:
 	main_active = 1
 
 func get_active_player() -> int:
-	return 0
+	return active_player
 
 func _get_units(active_player):
 	var units = [
@@ -78,7 +78,7 @@ func _get_cards(active_player):
 
 func _get_abilitys(unit):
 	if(unit.has("idx")):
-		var target := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(unit.idx)
+		var target := self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(active_player)
 		unit = unit.name
 		return target.get_skills_base("Soldat")
 	else:
@@ -157,3 +157,11 @@ func _activate_action(action, id):
 	print(id)
 func _activate_card(Card):
 	pass
+
+
+func _on_end_turn_pressed() -> void:
+	if(active_player == 0):
+		active_player = 1
+	else:
+		active_player = 0
+	_on_turn_start()

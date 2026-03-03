@@ -192,7 +192,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0, 0.62352943, 0.5568628, 1)
 theme_override_colors/font_focus_color = Color(0, 0.62352943, 0.5568628, 1)
-theme_override_colors/icon_hover_color = Color(0, 0.62352943, 0.5568628, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_031h6")
 text = "End Turn"
 
@@ -226,6 +225,8 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_npobg")
 
 [connection signal="pressed" from="MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Units" to="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell" method="_on_units_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Cards" to="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell" method="_on_cards_pressed"]
+[connection signal="button_up" from="MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/End_Turn" to="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell" method="_on_end_turn_button_up"]
+[connection signal="pressed" from="MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/End_Turn" to="MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell" method="_on_end_turn_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Close_Menue" to="MarginContainer/Control/Control_Menue" method="_on_close_menue_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/Control_Menue/HBoxContainer/Ui_Control/Ui_Control_shell/Button_shell/Close_Menue" to="MarginContainer/Control/mini_menue" method="_on_close_menue_pressed"]
 [connection signal="pressed" from="MarginContainer/Control/mini_menue/Button" to="MarginContainer/Control/Control_Menue" method="_on_button_pressed"]
