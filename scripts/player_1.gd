@@ -2,14 +2,14 @@ extends Node2D
 
 var _mana = 3
 
-var _cards_glossar = {
-	"Soldat beschwören" : 1, 
-	"Magier beschwören" : 1
-} # name : cost
+var _cards_glossar = [
+	{"name" :  "Soldat beschwören", "cost" : 1}, 
+	{"name" :  "Magier beschwören", "cost" : 1}
+] # name : cost
 
 
 var _deck = []
-
+var _discard = []
 var _hand = []
 var _hand_size = 5
 
@@ -86,10 +86,17 @@ func _lose_hp(value, idx):
 					var child = self.find_child(child_name)
 					child._die()
 
-#
-#func _add_card_to_deck(card):
-	#for card in _cards_glossar:
-		#if(card[""])
+
+func _add_card_to_deck(card):
+	for cards in _cards_glossar:
+		if(_cards_glossar[card].has[card]):
+			_deck.append(card)
+
+
+#func _draw(amount):
+	#for i in range(amount):
+		#if(i <= _deck.size()):
+			#var card = randi()
 
 
 # Called when the node enters the scene tree for the first time.
