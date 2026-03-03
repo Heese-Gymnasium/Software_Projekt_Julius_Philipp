@@ -65,7 +65,7 @@ func get_skills_base(unit_type):
 
 
 
-func _action(idx, action):
+func action(idx, action):
 	var type
 	for unit in units:
 		if(unit["idx"] == idx):
@@ -79,7 +79,7 @@ func _action(idx, action):
 
 
 
-func _lose_hp(value, idx):
+func lose_hp(value, idx):
 	for unit in units:
 		if(unit["idx"] == idx):
 			unit["hp"] -= value
