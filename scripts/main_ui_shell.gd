@@ -8,6 +8,7 @@ extends MarginContainer
 @onready var cards_main_parent := $ScrollContainer2
 @onready var unit_sub_menue := $ScrollContainer3
 @onready var active_player = 0
+@onready var u_old = _get_units(active_player)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_parent().show()
@@ -19,7 +20,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	var u = _get_units(active_player)
+	if u != u_old:
+		var units = _get_units(active_player)
+		_create_buttons(unit_main, units)
+		
 
 
 func _on_turn_start():
@@ -57,15 +62,9 @@ func get_active_player() -> int:
 	return active_player
 
 func _get_units(active_player):
-	var units = [
-	{"name": "Soldat", "hp": 100, "idx": 0},
-	{"name": "Bogenschütze", "hp": 70},
-	{"name": "Magier", "hp": 50},
-	{"name": "Soldat", "hp": 100},
-	{"name": "Bogenschütze", "hp": 70},
-	{"name": "Magier", "hp": 50}]
-	return units
-	
+	return self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(active_player).units
+
+
 func _get_cards(active_player):
 	var cards = [
 	{"name": "Card1", "cost": 100},
