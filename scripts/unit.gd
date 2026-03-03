@@ -3,6 +3,8 @@ extends Node
 var _x
 var _y
 
+var tile_coords = Vector2i(_x, _y) 
+
 var protected = 0
 
 
@@ -48,19 +50,19 @@ func _handle_action(action, unit_type):
 			self._feuerball
 
 
-
+var highlight_manager = get_tree().root.get_node("Main/root_tile/Highlight_Manager")
 
 func _hieb():
-	$Highlight.attack_highlight(1)
+	highlight_manager.attack_highlight(2, tile_coords)
 
 func _schild():
 	protected += 1
 
 func _eisspeer():
-	$Highlight.attack_highlight(4)
+	highlight_manager.attack_highlight(12, tile_coords)
 
 func _feuerball():
-	$Highlight.attack_highlight(6)
+	highlight_manager.attack_highlight(15, tile_coords)
 
 
 func _die():

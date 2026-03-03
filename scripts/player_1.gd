@@ -95,10 +95,12 @@ func _add_card_to_deck(card):
 			_deck.append(card)
 
 
-#func _draw(amount):
-	#for i in range(amount):
-		#if(i <= _deck.size()):
-			#var card = randi()
+func _draw_cards(amount):
+	var rng = RandomNumberGenerator.new()
+	for i in range(amount):
+		if(i <= _deck.size()):
+			var card = rng.randi_range(0, _deck.size())
+			_hand.append(_deck[card])
 
 
 # Called when the node enters the scene tree for the first time.
