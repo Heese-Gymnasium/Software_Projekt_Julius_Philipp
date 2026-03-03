@@ -1,11 +1,17 @@
 extends Node2D
 
+var _mana = 3
 
 var _cards_glossar = {
 	"Soldat beschwören" : 1, 
 	"Magier beschwören" : 1
-}
+} # name : cost
 
+
+var _deck = []
+
+var _hand = []
+var _hand_size = 5
 
 var _units_glossar = {
 	"Soldat" : [100, 16, ["Hieb", "Schild"]],  
@@ -15,7 +21,6 @@ var _units_glossar = {
 var units = []:
 	get:
 		return units
-
 
 
 
@@ -80,6 +85,11 @@ func _lose_hp(value, idx):
 					var child_name = "unit_%d" % idx
 					var child = self.find_child(child_name)
 					child._die()
+
+#
+#func _add_card_to_deck(card):
+	#for card in _cards_glossar:
+		#if(card[""])
 
 
 # Called when the node enters the scene tree for the first time.
