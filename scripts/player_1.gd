@@ -14,8 +14,8 @@ var _hand = []
 var _hand_size = 5
 
 var _units_glossar = {
-	"Soldat" : [100, 16, ["Hieb", "Schild"]],  
-	"Magier" : [70, 10, ["Feuerball", "Eisspeer"]]
+	"Soldat" : [100, 16, ["Move", "Hieb", "Schild"]],  
+	"Magier" : [70, 10, ["Move", "Feuerball", "Eisspeer"]]
 }   #name(unit_type) : [hp, move range, [skills]]
 
 var units = []:
@@ -89,6 +89,10 @@ func lose_hp(value, idx):
 					child._die()
 
 
+func _finish_attack(trgt_coords):
+	pass
+
+
 func _add_card_to_deck(card):
 	for cards in _cards_glossar:
 		if(_cards_glossar[card].has[card]):
@@ -111,6 +115,8 @@ func _shuffle_discard_to_deck():
 	_discard.clear()
 
 
+func _handle_card():
+	pass
 
 
 # Called when the node enters the scene tree for the first time.
