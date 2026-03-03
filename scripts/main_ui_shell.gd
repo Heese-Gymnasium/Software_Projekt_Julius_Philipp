@@ -14,9 +14,7 @@ func _ready() -> void:
 	get_parent().show()
 	show()
 	_on_turn_start()
-
-
-		
+	print("Units:", _get_units(active_player))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,6 +22,7 @@ func _process(delta: float) -> void:
 	if u != u_old:
 		var units = _get_units(active_player)
 		_create_buttons(unit_main, units)
+	u_old = u
 		
 
 
@@ -62,8 +61,9 @@ func get_active_player() -> int:
 	return active_player
 
 func _get_units(active_player):
-	return self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("root_tile").get_node("TileMapLayer").get_child(active_player).units
-
+	var t = get_tree().root.get_node("Main/root_tile/TileMapLayer")
+	var x = t.get_child(active_player).units
+	return x
 
 func _get_cards(active_player):
 	var cards = [
