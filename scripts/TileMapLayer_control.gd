@@ -102,7 +102,7 @@ func _assign_id():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_initialize_Map(Map_x, Map_y)
-	$player1._add_unit(1, 1, "base")
+	$player1._add_unit(1, 1, "Soldat")
 	pass # Replace with function body.
 
 
