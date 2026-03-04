@@ -12,7 +12,7 @@ extends Node
 
 var map_preview = []
 
-var next_unit_id = 0
+var next_unit_id = 1
 
 var base_unit = load("res://scenes/unit.tscn")
 
@@ -93,10 +93,12 @@ func _initialize_Map(x, y):
 
 
 func _assign_id():
-	var id = next_unit_id
-	next_unit_id += 1
-	return id
-
+	if not(next_unit_id <= 0):
+		var id = next_unit_id
+		next_unit_id += 1
+		return id
+	else:
+		push_error("unit idx not valid")
 
 
 # Called when the node enters the scene tree for the first time.

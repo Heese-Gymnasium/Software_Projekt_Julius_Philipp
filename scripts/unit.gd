@@ -39,6 +39,8 @@ func _spawn(spawn_x, spawn_y):
 func _handle_action(action, unit_type):
 	var actions = get_parent().get_skills_base(unit_type)
 	if actions.has(action):
+		if(action == "Move"):
+			_move(unit_type)
 		if(action == "Hieb"):
 			_hieb()
 		if(action == "Schild"):
@@ -50,9 +52,14 @@ func _handle_action(action, unit_type):
 
 
 
+func _move(unit_type):
+	var tile_coords = Vector2i(_x, _y)
+	get_parent().last_attack = "Move"
+	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(get_parent().get_range_base(unit_type), tile_coords)
 
 func _hieb():
 	var tile_coords = Vector2i(_x, _y)
+	get_parent().last_attack = "Hieb"
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(2, tile_coords)
 
 func _schild():
@@ -60,10 +67,12 @@ func _schild():
 
 func _eisspeer():
 	var tile_coords = Vector2i(_x, _y)
+	get_parent().last_attack = "Eisspeer"
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(12, tile_coords)
 
 func _feuerball():
 	var tile_coords = Vector2i(_x, _y)
+	get_parent().last_attack = "Feuerball"
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(15, tile_coords)
 
 
@@ -72,23 +81,17 @@ func _die():
 
 
 
-func _move(unit_type):
-	if(x <= get_parent().Map_x && y <= get_parent().Map_y && x >= 0 && y >= 0):
+func _finish_move(idx, trgt_coords):
+	var trgt_x = trgt_coords.x
+	var trgt_y = trgt_coords.y
+	if(trgt_x <= get_parent().Map_x && trgt_y <= get_parent().Map_y && trgt_x >= 0 && trgt_y >= 0):
 		if(get_parent().Map[y][x][0] == 0):
-			var map_preview = get_node("/root/Main/root_tile/TileMapLayer").Map.get()
-			var range = get_parent().get_range_base(unit_type)
-			var tar_xy = Vector2(get_node("/root/Main/root_tile/TileMapLayer").tile_coords)
-			if((tar_xy - Vector2(_x, _y)).abs().length() <= range):
-				get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [0, -7]])
-				_x = x
-				_y = y
-				get_node("/root/Main/root_tile/TileMapLayer").Map.set([_x, _y, [unit_type, -7]])
-			else:
-				push_error("outside of range")
+			self.position = trgt_coords
 		else:
 			push_error("space occupied")
 	else:
 		push_error("cant move in void")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

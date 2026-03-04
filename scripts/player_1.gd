@@ -1,6 +1,6 @@
 extends Node2D
 
-var _mana = 3
+var mana = 3
 
 var _cards_glossar = [
 	{"name" :  "Soldat beschwören", "cost" : 1}, 
@@ -10,8 +10,9 @@ var _cards_glossar = [
 
 var _deck = []
 var _discard = []
-var _hand = []
+var hand = []
 var _hand_size = 5
+
 
 var _units_glossar = {
 	"Soldat" : [100, 16, ["Move", "Hieb", "Schild"]],  
@@ -22,6 +23,9 @@ var units = []:
 	get:
 		return units
 
+
+var _attacks_glossar = {"Hieb" : 50, "Feuerball" : 40, "Eisspeer" : 30}
+var last_attack
 
 
 func _add_unit(x, y, unit_type):
@@ -89,38 +93,61 @@ func lose_hp(value, idx):
 					child._die()
 
 
-func finish_attack(trgt_coords):
-	print("Hallo")
+func finish_attack(idx, trgt_coords : Vector2i): #idx ist die agierende unit, nicht das ziel
+	var trgt_x = trgt_coords.x
+	var trgt_y = trgt_coords.y
+	if(last_attack == "Move"):
+		var child_name = "unit_%d" % idx
+		var child = self.find_child(child_name)
+		child._finish_move(idx, trgt_coords)
+	var trgt_unit = get_parent().Map[trgt_y][trgt_x][0]
+	if(trgt_unit != 0):
+		lose_hp(_attacks_glossar[last_attack], trgt_unit)
+	else:
+		push_error("no target")
 
 
 func _add_card_to_deck(card):
 	for cards in _cards_glossar:
-		if(_cards_glossar[card].has[card]):
+		if(cards.has(card)):
 			_deck.append(card)
 
 
-func _draw_cards(amount):
+func draw_cards(amount):
 	var rng = RandomNumberGenerator.new()
 	for i in range(amount):
 		if(_deck.size() > 0):
 			var card = rng.randi_range(0, _deck.size())
-			_hand.append(_deck[card])
+			hand.append(_deck[card])
 		elif(_discard.size() > 0):
 			self._shuffle_discard_to_deck()
 		else:
 			push_error("deck empty")
+
 
 func _shuffle_discard_to_deck():
 	_deck.append_array(_discard)
 	_discard.clear()
 
 
-func _handle_card():
-	pass
+func _handle_card(card, trgt_coords : Vector2i):
+	var trgt_x = trgt_coords.x
+	var trgt_y = trgt_coords.y
+	for cards in _cards_glossar:
+		if(cards["name"] ==  card):
+			if(mana >= cards["cost"]):
+				if(card == "Soldat beschwören"):
+					units.add(trgt_x, trgt_y, "Soldat")
+					mana -= card["cost"]
+				elif(card == "Magier beschwören"):
+					units.add(trgt_x, trgt_y, "Magier")
+					mana -= card["cost"]
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	self._add_card_to_deck("Soldat beschwören")
+	self._add_card_to_deck("Magier beschwören")
 	pass # Replace with function body.
 
 
