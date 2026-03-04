@@ -25,7 +25,7 @@ func _on_turn_start():
 	player.mana = 3
 	player.draw_cards(2)           #aktionen, die der Spieler am Anfang des Zuges machen muss
 	
-	var cards = _get_cards(active_player)
+	var cards = await _get_cards(active_player)
 	_create_buttons(cards_main, cards)
 	var units = _get_units(active_player)
 	_create_buttons(unit_main, units)
@@ -64,6 +64,7 @@ func _get_units(active_player):
 	return x
 
 func _get_cards(active_player):
+	await get_tree().process_frame
 	var t = get_tree().root.get_node("Main/root_tile/TileMapLayer")
 	var cards = t.get_child(active_player).hand
 	return cards
