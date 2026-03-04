@@ -1,5 +1,6 @@
 extends Node2D
 
+var anti_Phlipflop_arbeitszeitbetrugs_index
 var mana = 3
 
 var _cards_glossar = [
@@ -35,6 +36,7 @@ func _add_unit(x, y, unit_type):
 			get_parent().Map = [x, y, [id, -7]]
 			var trgt_unit = get_parent().base_unit.instantiate()
 			trgt_unit.name = "unit_%d" % id
+			trgt_unit.idx = id
 			self.add_child(trgt_unit)
 			var pos_x = (x - y) * get_parent().tile_width / 2
 			var pos_y = (x + y) * get_parent().tile_height / 2
@@ -93,12 +95,13 @@ func lose_hp(value, idx):
 					child._die()
 
 
-func finish_attack(idx, trgt_coords : Vector2i): #idx ist die agierende unit, nicht das ziel
+func finish_attack(trgt_coords : Vector2i): #idx ist die agierende unit, nicht das ziel
+	var idx = anti_Phlipflop_arbeitszeitbetrugs_index
 	var trgt_x = trgt_coords.x
 	var trgt_y = trgt_coords.y
 	if(last_attack == "Move"):
 		var child_name = "unit_%d" % idx
-		var child = self.find_child(child_name)
+		var child = self.get_node(child_name)
 		child._finish_move(idx, trgt_coords)
 	var trgt_unit = get_parent().Map[trgt_y][trgt_x][0]
 	if(trgt_unit != 0):
