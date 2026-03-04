@@ -53,13 +53,13 @@ func _handle_action(action, unit_type):
 
 
 func _move(unit_type):
-	var tile_coords = Vector2i(_x, _y)
+	var tile_coords = Vector2i(_x - 1, _y - 1)
 	get_parent().last_attack = "Move"
 	get_parent().anti_Phlipflop_arbeitszeitbetrugs_index = idx
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(get_parent().get_range_base(unit_type), tile_coords)
 
 func _hieb():
-	var tile_coords = Vector2i(_x, _y)
+	var tile_coords = Vector2i(_x - 1, _y - 1)
 	get_parent().last_attack = "Hieb"
 	get_parent().anti_Phlipflop_arbeitszeitbetrugs_index = idx
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(2, tile_coords)
@@ -68,13 +68,13 @@ func _schild():
 	protected += 1
 
 func _eisspeer():
-	var tile_coords = Vector2i(_x, _y)
+	var tile_coords = Vector2i(_x - 1, _y - 1)
 	get_parent().last_attack = "Eisspeer"
 	get_parent().anti_Phlipflop_arbeitszeitbetrugs_index = idx
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(12, tile_coords)
 
 func _feuerball():
-	var tile_coords = Vector2i(_x, _y)
+	var tile_coords = Vector2i(_x - 1, _y - 1)
 	get_parent().last_attack = "Feuerball"
 	get_parent().anti_Phlipflop_arbeitszeitbetrugs_index = idx
 	get_node("/root/Main/root_tile/Highlight_Manager").attack_highlight(15, tile_coords)
@@ -86,11 +86,15 @@ func _die():
 
 
 func _finish_move(idx, trgt_coords):
-	var trgt_x = trgt_coords.x
+	var trgt_x = trgt_coords.x + 1
 	var trgt_y = trgt_coords.y
 	if(trgt_x <= get_parent().get_parent().Map_x && trgt_y <= get_parent().get_parent().Map_y && trgt_x >= 0 && trgt_y >= 0):
 		if(get_parent().get_parent().Map[y][x][0] == 0):
-			self.position = trgt_coords
+			var pos_x = (trgt_x - trgt_y) * get_parent().get_parent().tile_width / 2
+			var pos_y = (trgt_x + trgt_y) * get_parent().get_parent().tile_height / 2
+			self.position = Vector2(pos_x, pos_y)
+			x = trgt_x
+			y = trgt_y
 		else:
 			push_error("space occupied")
 	else:
