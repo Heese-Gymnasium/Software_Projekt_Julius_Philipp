@@ -72,17 +72,27 @@ func get_skills_base(unit_type):
 
 
 func action(idx, action):
+	var c = false
 	var type
 	for unit in units:
 		if(unit["idx"] == idx):
+			c = true
 			type = unit["name"]
+			break
 		else:
 			push_error("unit doesnt exist")
-	var child_name = "unit_%d" % idx
-	var unit = self.get_node(child_name)
-	unit._handle_action(action, type)
-
-
+	var m = false
+	if not c:
+		for cards in _cards_glossar:
+			if(cards.name == action):
+				m = true
+	if m:
+		var H = get_parent().get_parent().get_node("Highlight_Manager")
+		H.finish_card(action)
+	elif c:
+		var child_name = "unit_%d" % idx
+		var unit = self.get_node(child_name)
+		unit._handle_action(action, type)
 
 
 func lose_hp(value, idx):
@@ -123,7 +133,7 @@ func draw_cards(amount):
 		print(_deck)
 		if(_deck.size() > 0):
 			print("jaaaaaaaaaaa")
-			var card = rng.randi_range(0, _deck.size())
+			var card = rng.randi_range(0, _deck.size()-1)
 			hand.append(_deck[card])
 		elif(_discard.size() > 0):
 			self._shuffle_discard_to_deck()
@@ -138,18 +148,20 @@ func _shuffle_discard_to_deck():
 	_discard.clear()
 
 
-func _handle_card(card, trgt_coords : Vector2i):
+func handle_card(card, trgt_coords : Vector2i):
 	var trgt_x = trgt_coords.x
 	var trgt_y = trgt_coords.y
 	for cards in _cards_glossar:
-		if(cards["name"] ==  card):
-			if(mana >= cards["cost"]):
+		if(cards.name ==  card):
+			if(mana >= cards.cost):
 				if(card == "Soldat beschwören"):
-					units.add(trgt_x, trgt_y, "Soldat")
-					mana -= card["cost"]
+					_add_unit(trgt_x, trgt_y, "Soldat")
+					mana -= cards["cost"]
+					break
 				elif(card == "Magier beschwören"):
-					units.add(trgt_x, trgt_y, "Magier")
-					mana -= card["cost"]
+					_add_unit(trgt_x, trgt_y, "Magier")
+					mana -= cards["cost"]
+					break
 
 
 

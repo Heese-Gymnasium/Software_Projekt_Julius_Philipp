@@ -1,4 +1,7 @@
 extends Node2D
+
+var action
+var card_request = false
 var ui_interact_allowence : bool = true
 var drange
 var dPos
@@ -24,6 +27,9 @@ func _ready() -> void:
 	tile_coords_old = tileMapLayer.local_to_map(local_pos_old) + render_offset
 	Tile_old = tile_coords_old
 
+func finish_card(action_):
+	action = action_
+	card_request = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -46,9 +52,12 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if(event is InputEventMouseButton):
 		var m = false
+		var c = false
 		if(event.button_index == MOUSE_BUTTON_LEFT):
 			if highligthet != []:
 				m = true
+			elif card_request == true:
+				c = true
 			var mouse_pos := get_global_mouse_position()
 			var local_pos : Vector2 = tileMapLayer.to_local(mouse_pos)
 			Tile = tileMapLayer.local_to_map(local_pos) + render_offset
@@ -56,7 +65,9 @@ func _input(event: InputEvent) -> void:
 				if highligthet.has(Tile):
 					_action_return()
 				_attack_highlight_delete()
-				
+			if c:
+				var active_player = get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").get_active_player()
+				get_parent().get_node("TileMapLayer").get_child(active_player).handle_card(action, Tile)
 			if Tile != Tile_old:
 				highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
 				highlight_map.set_cell(Tile_old, source_id, Vector2i(3, 1))
