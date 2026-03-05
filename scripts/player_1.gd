@@ -117,15 +117,20 @@ func _add_card_to_deck(card):
 
 
 func draw_cards(amount):
+	await get_tree().process_frame
 	var rng = RandomNumberGenerator.new()
 	for i in range(amount):
+		print(_deck)
 		if(_deck.size() > 0):
+			print("jaaaaaaaaaaa")
 			var card = rng.randi_range(0, _deck.size())
 			hand.append(_deck[card])
 		elif(_discard.size() > 0):
 			self.shuffle_discard_to_deck()
 		else:
 			push_error("deck empty")
+	print(hand)
+	get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").change_cards(hand)
 
 
 func shuffle_discard_to_deck():
