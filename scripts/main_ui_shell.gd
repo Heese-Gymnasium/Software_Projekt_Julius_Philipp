@@ -23,6 +23,7 @@ func _on_turn_start():
 	var t = get_tree().root.get_node("Main/root_tile/TileMapLayer")
 	var player = t.get_child(active_player)
 	player.mana = 3
+	player.shuffle_hand_to_discard()
 	player.draw_cards(2)           #aktionen, die der Spieler am Anfang des Zuges machen muss
 	
 	var cards = await _get_cards(active_player)

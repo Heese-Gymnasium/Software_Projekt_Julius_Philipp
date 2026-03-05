@@ -114,7 +114,7 @@ func finish_attack(trgt_coords : Vector2i): #idx ist die agierende unit, nicht d
 		var child = self.get_node(child_name)
 		child._finish_move(idx, trgt_coords)
 	var trgt_unit = get_parent().Map[trgt_y][trgt_x][0]
-	if(trgt_unit != 0):
+	if(trgt_unit != 0 && last_attack != "Move"):
 		lose_hp(_attacks_glossar[last_attack], trgt_unit)
 	else:
 		push_error("no target")
@@ -133,19 +133,23 @@ func draw_cards(amount):
 		print(_deck)
 		if(_deck.size() > 0):
 			print("jaaaaaaaaaaa")
-			var card = rng.randi_range(0, _deck.size()-1)
+			var card = rng.randi_range(0, _deck.size() - 1)
 			hand.append(_deck[card])
 		elif(_discard.size() > 0):
-			self._shuffle_discard_to_deck()
+			self.shuffle_discard_to_deck()
 		else:
 			push_error("deck empty")
 	print(hand)
 	get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").change_cards(hand)
 
 
-func _shuffle_discard_to_deck():
+func shuffle_discard_to_deck():
 	_deck.append_array(_discard)
 	_discard.clear()
+
+func shuffle_hand_to_discard():
+	_discard.append_array(hand)
+	hand.clear()
 
 
 func handle_card(card, trgt_coords : Vector2i):
