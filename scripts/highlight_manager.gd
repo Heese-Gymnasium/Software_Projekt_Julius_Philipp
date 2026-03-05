@@ -70,6 +70,7 @@ func _input(event: InputEvent) -> void:
 			_attack_highlight_delete()
 		if c:
 			var active_player = get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").get_active_player()
+			
 			get_parent().get_node("TileMapLayer").get_child(active_player).handle_card(action, Tile)
 		if Tile != Tile_old:
 			highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
@@ -98,7 +99,7 @@ func attack_highlight(r, pos):
 			var dy = p.y - pos.y -1
 
 			# Euklidische Distanz (Kreis)
-			if dx * dx + dy * dy <= r * r:
+			if dx * dx + dy * dy < r * r:
 				highligthet.append(p)
 				highlight_map.set_cell(p, source_id, Vector2i(1, 0))
 func _attack_highlight_delete():
@@ -112,7 +113,7 @@ func _attack_highlight_delete():
 			var dy = p.y - pos.y - 1
 
 			# Euklidische Distanz (Kreis)
-			if dx * dx + dy * dy <= r * r:
+			if dx * dx + dy * dy < r * r:
 				highligthet.erase(p)
 				highlight_map.set_cell(p, source_id, Vector2i(3, 1))
 
