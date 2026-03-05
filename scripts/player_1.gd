@@ -41,6 +41,8 @@ func _add_unit(x, y, unit_type):
 			var pos_x = (x - y) * get_parent().tile_width / 2
 			var pos_y = (x + y) * get_parent().tile_height / 2
 			trgt_unit._spawn(pos_x, pos_y)
+			trgt_unit.x = x
+			trgt_unit.y = y
 			units.append({"name" : unit_type, "hp" : get_hp_base(unit_type), "idx" : id})
 			await get_tree().process_frame
 			get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").change_units(units)
@@ -56,13 +58,10 @@ func get_hp_base(unit_type):
 		return _units_glossar[unit_type][0]
 	return null
 
-
 func get_range_base(unit_type):
 	if _units_glossar.has(unit_type):
 		return _units_glossar.get(unit_type)[1]
 	return null
-
-
 
 func get_skills_base(unit_type):
 	if _units_glossar.has(unit_type):
