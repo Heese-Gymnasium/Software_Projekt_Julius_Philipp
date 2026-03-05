@@ -1,16 +1,20 @@
 extends Node2D
 
 var action
-var card_request = false
+var card_request : bool = false
 var ui_interact_allowence : bool = true
 var drange
 var dPos
-var highligthet: Array
+var highligthet: Array = []
 var Tile
 var Tile_old
-var tile_coords:
+var _tile_coords: Vector2i
+var tile_coords: 
 	get:
-		return tile_coords
+		return _tile_coords
+	set(value):
+		_tile_coords = value
+
 var highlight_map: TileMapLayer
 var mouse_old_pos: Vector2
 var tile_coords_old : Vector2i
@@ -50,28 +54,27 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if(event is InputEventMouseButton):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var m = false
 		var c = false
-		if(event.button_index == MOUSE_BUTTON_LEFT):
-			if highligthet != []:
-				m = true
-			elif card_request == true:
-				c = true
-			var mouse_pos := get_global_mouse_position()
-			var local_pos : Vector2 = tileMapLayer.to_local(mouse_pos)
-			Tile = tileMapLayer.local_to_map(local_pos) + render_offset
-			if m :
-				if highligthet.has(Tile):
-					_action_return()
-				_attack_highlight_delete()
-			if c:
-				var active_player = get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").get_active_player()
-				get_parent().get_node("TileMapLayer").get_child(active_player).handle_card(action, Tile)
-			if Tile != Tile_old:
-				highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
-				highlight_map.set_cell(Tile_old, source_id, Vector2i(3, 1))
-				Tile_old = Tile
+		if highligthet != []:
+			m = true
+		elif card_request == true:
+			c = true
+		var mouse_pos := get_global_mouse_position()
+		var local_pos : Vector2 = tileMapLayer.to_local(mouse_pos)
+		Tile = tileMapLayer.local_to_map(local_pos) + render_offset
+		if m :
+			if highligthet.has(Tile):
+				_action_return()
+			_attack_highlight_delete()
+		if c:
+			var active_player = get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").get_active_player()
+			get_parent().get_node("TileMapLayer").get_child(active_player).handle_card(action, Tile)
+		if Tile != Tile_old:
+			highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
+			highlight_map.set_cell(Tile_old, source_id, Vector2i(3, 1))
+			Tile_old = Tile
 func _evaluate_Tile():
 	var Map = tileMapLayer.Map.get()
 	var x = Tile.x
@@ -84,32 +87,32 @@ func _evaluate_Tile():
 func _unit_action(cell):
 	pass
 
-func attack_highlight(range, pos):
+func attack_highlight(r, pos):
 	dPos = pos
-	drange = range
-	for x in range(pos.x - range, pos.x + range + 1):
-		for y in range(pos.y - range, pos.y + range + 2):
+	drange = r
+	for x in range(pos.x - r, pos.x + r + 1):
+		for y in range(pos.y - r, pos.y + r + 2):
 			var p = Vector2i(x, y)
 
 			var dx = p.x - pos.x 
 			var dy = p.y - pos.y -1
 
 			# Euklidische Distanz (Kreis)
-			if dx * dx + dy * dy <= range * range:
+			if dx * dx + dy * dy <= r * r:
 				highligthet.append(p)
 				highlight_map.set_cell(p, source_id, Vector2i(1, 0))
 func _attack_highlight_delete():
-	var range = drange
+	var r = drange
 	var pos = dPos
-	for x in range(pos.x - range, pos.x + range + 1):
-		for y in range(pos.y - range, pos.y + range + 2):
+	for x in range(pos.x - r, pos.x + r + 1):
+		for y in range(pos.y - r, pos.y + r + 2):
 			var p = Vector2i(x, y)
 
 			var dx = p.x - pos.x 
 			var dy = p.y - pos.y - 1
 
 			# Euklidische Distanz (Kreis)
-			if dx * dx + dy * dy <= range * range:
+			if dx * dx + dy * dy <= r * r:
 				highligthet.erase(p)
 				highlight_map.set_cell(p, source_id, Vector2i(3, 1))
 

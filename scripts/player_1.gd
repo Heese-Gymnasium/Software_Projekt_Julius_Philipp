@@ -132,14 +132,12 @@ func draw_cards(amount):
 	for i in range(amount):
 		print(_deck)
 		if(_deck.size() > 0):
-			print("jaaaaaaaaaaa")
 			var card = rng.randi_range(0, _deck.size() - 1)
 			hand.append(_deck[card])
 		elif(_discard.size() > 0):
 			self.shuffle_discard_to_deck()
 		else:
 			push_error("deck empty")
-	print(hand)
 	get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").change_cards(hand)
 
 
@@ -172,7 +170,6 @@ func handle_card(card, trgt_coords : Vector2i):
 func _ready() -> void:
 	self._add_card_to_deck("Soldat beschwören")
 	self._add_card_to_deck("Magier beschwören")
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
