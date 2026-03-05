@@ -30,12 +30,6 @@ func _spawn(spawn_x, spawn_y):
 
 
 
-#func _move_menu():
-	#$Camera2d.align()
-	#if InputEventMouseButton:
-		#_move($TileMapLayer.Map[y[x[0]]])
-
-
 func _handle_action(action, unit_type):
 	var actions = get_parent().get_skills_base(unit_type)
 	if actions.has(action):
@@ -91,6 +85,7 @@ func _finish_move(idx, trgt_coords):
 	var trgt_y = trgt_coords.y
 	if(trgt_x <= get_parent().get_parent().Map_x && trgt_y <= get_parent().get_parent().Map_y && trgt_x >= 0 && trgt_y >= 0):
 		print("in map")
+		print(get_parent().get_parent().Map[y][x])
 		if(get_parent().get_parent().Map[y][x][0] == 0):
 			print("feld leer")
 			get_parent().get_parent().Map[trgt_coords.y][trgt_coords.x][0] = idx
