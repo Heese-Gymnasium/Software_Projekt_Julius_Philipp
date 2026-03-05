@@ -165,3 +165,6 @@ func _on_end_turn_pressed() -> void:
 func change_units(units):
 	_create_buttons(unit_main, units)
 	
+func change_cards(cards):
+	_create_buttons(cards_main, cards)
+	

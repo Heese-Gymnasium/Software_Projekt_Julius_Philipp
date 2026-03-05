@@ -112,20 +112,25 @@ func finish_attack(trgt_coords : Vector2i): #idx ist die agierende unit, nicht d
 
 func _add_card_to_deck(card):
 	for cards in _cards_glossar:
-		if(cards.has(card)):
+		if(cards.name == card):
 			_deck.append(card)
 
 
 func draw_cards(amount):
+	await get_tree().process_frame
 	var rng = RandomNumberGenerator.new()
 	for i in range(amount):
+		print(_deck)
 		if(_deck.size() > 0):
+			print("jaaaaaaaaaaa")
 			var card = rng.randi_range(0, _deck.size())
 			hand.append(_deck[card])
 		elif(_discard.size() > 0):
 			self._shuffle_discard_to_deck()
 		else:
 			push_error("deck empty")
+	print(hand)
+	get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").change_cards(hand)
 
 
 func _shuffle_discard_to_deck():
