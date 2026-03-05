@@ -90,7 +90,8 @@ func _finish_move(idx, trgt_coords):
 	var trgt_y = trgt_coords.y
 	if(trgt_x <= get_parent().get_parent().Map_x && trgt_y <= get_parent().get_parent().Map_y && trgt_x >= 0 && trgt_y >= 0):
 		if(get_parent().get_parent().Map[y][x][0] == 0):
-			get_parent().get_parent().Map[trgt_coords.y][trgt_coords.x][1] = idx
+			get_parent().get_parent().Map[trgt_coords.y][trgt_coords.x][0] = idx
+			get_parent().get_parent().Map[y][x][0] = 0
 			var pos_x = (trgt_x - trgt_y) * get_parent().get_parent().tile_width / 2
 			var pos_y = (trgt_x + trgt_y) * get_parent().get_parent().tile_height / 2
 			self.position = Vector2(pos_x, pos_y)
