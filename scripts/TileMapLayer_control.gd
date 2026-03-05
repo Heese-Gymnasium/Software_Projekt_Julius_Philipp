@@ -35,8 +35,8 @@ var Map:
 				else:
 					_Map[y][x] = arr
 		else:
-			push_error("value for _Map.set must be of type: [x, y, [int/String, int],...] or same type as _Map: [ y: [x: [int/String, int] ]]")
-		# eine -7 ändert den Wert nicht
+			push_error("value for _Map.set must be of type: [x, y, [int, int],...] or same type as _Map: [ y: [x: [int/String, int] ]]")
+			# eine -7 ändert den Wert nicht
 				
 func validate_packs(pack: Array) -> bool:
 	if pack.size() % 3 != 0:
@@ -66,7 +66,7 @@ func validate_packs(pack: Array) -> bool:
 		if not (arr[1] is int):
 			return false
 			
-		if not (arr[0] is int or arr[0] is String):
+		if not (arr[0] is int):
 			return false
 	return true
 
@@ -81,6 +81,11 @@ var Map_y:
 		return _Map_y
 	set(value):
 		_Map_y = value
+
+func print_map():
+	for ads in range(Map_y):
+		print(ads)
+		print(Map[ads])
 
 
 func _initialize_Map(x, y):
