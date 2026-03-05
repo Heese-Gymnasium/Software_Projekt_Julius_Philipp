@@ -30,7 +30,7 @@ var last_attack
 
 
 func _add_unit(x, y, unit_type):
-	if(x <= get_parent().Map_x && y <= get_parent().Map_y && x >= 0 && y >= 0):
+	if(x < get_parent().Map_x && y < get_parent().Map_y && x >= 0 && y >= 0):
 		if(get_parent().Map[y][x][0] == 0): # x und y vertauscht, da die x in y gespeichert sind
 			var id = get_parent()._assign_id()
 			get_parent().Map = [x, y, [id, -7]]
