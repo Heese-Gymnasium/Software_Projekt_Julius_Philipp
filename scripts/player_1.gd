@@ -95,13 +95,17 @@ func action(idx, action):
 
 
 func lose_hp(value, idx):
+	var i = 0
 	for unit in units:
+		i += 1
 		if(unit["idx"] == idx):
 			unit["hp"] -= value
 			if(unit["hp"] <= 0):
+					units.remove_at(i)
 					var child_name = "unit_%d" % idx
-					var child = self.find_child(child_name)
+					var child = self.get_node(child_name)
 					child._die()
+					print(units)
 
 
 func finish_attack(trgt_coords : Vector2i): #idx ist die agierende unit, nicht das ziel
@@ -133,6 +137,7 @@ func draw_cards(amount):
 		if(_deck.size() > 0):
 			var card = rng.randi_range(0, _deck.size() - 1)
 			hand.append(_deck[card])
+			_deck.remove_at(card)
 		elif(_discard.size() > 0):
 			self.shuffle_discard_to_deck()
 		else:

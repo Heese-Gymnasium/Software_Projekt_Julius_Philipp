@@ -83,9 +83,9 @@ var Map_y:
 		_Map_y = value
 
 func print_map():
-	for ads in range(Map_y):
-		print(ads)
-		print(Map[ads])
+	for a in range(Map_y):
+		print(a)
+		print(Map[a])
 
 
 func _initialize_Map(x, y):
