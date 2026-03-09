@@ -1,15 +1,13 @@
 extends Node2D
 
 var anti_Phlipflop_arbeitszeitbetrugs_index
-
-var mana = 3:
+var _mana = 3
+var mana:
 	set(value):
-		get_tree().root.get_node("/Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label").update_stats({"mana" : mana})
-		if(value >= 0):
-			mana = value
-		elif(value < 0):
-			mana -= value
-
+		_mana = max(0, value)
+		get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label").update_stats({"mana" : mana})
+	get:
+		return _mana
 var _cards_glossar = [
 	{"name" :  "Soldat beschwören", "cost" : 1}, 
 	{"name" :  "Magier beschwören", "cost" : 1}
@@ -94,7 +92,7 @@ func action(idx, action):
 				m = true
 	if m:
 		var H = get_parent().get_parent().get_node("Highlight_Manager")
-		H.finish_card(action)
+		H.finish_card(action) 
 	elif c:
 		var child_name = "unit_%d" % idx
 		var unit = self.get_node(child_name)
@@ -168,12 +166,12 @@ func handle_card(card, trgt_coords : Vector2i):
 		if(cards.name ==  card):
 			if(mana >= cards.cost):
 				if(card == "Soldat beschwören"):
-					_add_unit(trgt_x, trgt_y, "Soldat")
-					mana.set(-cards["cost"])
+					_add_unit(trgt_x + 1, trgt_y, "Soldat")
+					mana -= cards["cost"]
 					break
 				elif(card == "Magier beschwören"):
-					_add_unit(trgt_x, trgt_y, "Magier")
-					mana.set(-cards["cost"])
+					_add_unit(trgt_x + 1 , trgt_y, "Magier")
+					mana -= cards["cost"]
 					break
 
 
@@ -181,7 +179,6 @@ func handle_card(card, trgt_coords : Vector2i):
 func _ready() -> void:
 	self._add_card_to_deck("Soldat beschwören")
 	self._add_card_to_deck("Magier beschwören")
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

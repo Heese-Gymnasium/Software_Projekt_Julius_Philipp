@@ -70,7 +70,7 @@ func _input(event: InputEvent) -> void:
 			_attack_highlight_delete()
 		if c:
 			var active_player = get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/main_ui/main_ui_shell").get_active_player()
-			
+			card_request = false
 			get_parent().get_node("TileMapLayer").get_child(active_player).handle_card(action, Tile)
 		if Tile != Tile_old:
 			highlight_map.set_cell(Tile, source_id, Vector2i(1, 0))
