@@ -1,9 +1,11 @@
 extends Node
 
+const source_id  := 3
+
 @onready var _Map: Array
 
-@onready var _Map_x = 39
-@onready var _Map_y = 39
+@onready var _Map_x = 30
+@onready var _Map_y = 30
 
 @onready var tile_width = self.tile_set.tile_size.x
 @onready var tile_height = self.tile_set.tile_size.y
@@ -37,7 +39,7 @@ var Map:
 		else:
 			push_error("value for _Map.set must be of type: [x, y, [int, int],...] or same type as _Map: [ y: [x: [int/String, int] ]]")
 			# eine -7 ändert den Wert nicht
-				
+
 func validate_packs(pack: Array) -> bool:
 	if pack.size() % 3 != 0:
 		return false
@@ -82,19 +84,23 @@ var Map_y:
 	set(value):
 		_Map_y = value
 
+
 func print_map():
 	for a in range(Map_y):
 		print(a)
 		print(Map[a])
 
 
-func _initialize_Map(x, y):
-	var line = []
-	for i in range(x):
-		line.append([0, 1]) #0 ist die Unit, die das Feld belegt, wobei 0 für keine unit auf dem Feld steht, 1 ist der terraintyp
-	map_preview.resize(y)
-	map_preview.fill(line)
+func _initialize_Map(mapx, mapy):
+	for n in range(mapy):
+		var line = []
+		for i in range(mapx):
+			line.append([0, 1]) #0 ist die Unit, die das Feld belegt, wobei 0 für keine unit auf dem Feld steht, 1 ist der terraintyp
+		map_preview.append(line)
 	Map = map_preview
+	for my in range(Map_y):
+		for mx in range(Map_x):
+			get_node("/root/Main/root_tile/TileMapLayer").set_cell(Vector2i(mx, my), source_id, Vector2i(2, 0))
 
 
 func _assign_id():

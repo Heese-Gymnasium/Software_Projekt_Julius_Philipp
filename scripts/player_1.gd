@@ -1,7 +1,14 @@
 extends Node2D
 
 var anti_Phlipflop_arbeitszeitbetrugs_index
-var mana = 3
+
+var mana = 3:
+	set(value):
+		get_tree().root.get_node("/Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label").update_stats({"mana" : mana})
+		if(value >= 0):
+			mana = value
+		elif(value < 0):
+			mana -= value
 
 var _cards_glossar = [
 	{"name" :  "Soldat beschwören", "cost" : 1}, 
@@ -162,11 +169,11 @@ func handle_card(card, trgt_coords : Vector2i):
 			if(mana >= cards.cost):
 				if(card == "Soldat beschwören"):
 					_add_unit(trgt_x, trgt_y, "Soldat")
-					mana -= cards["cost"]
+					mana.set(-cards["cost"])
 					break
 				elif(card == "Magier beschwören"):
 					_add_unit(trgt_x, trgt_y, "Magier")
-					mana -= cards["cost"]
+					mana.set(-cards["cost"])
 					break
 
 
