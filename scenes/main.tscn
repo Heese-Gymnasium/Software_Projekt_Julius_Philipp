@@ -468,6 +468,9 @@ script = ExtResource("3_tbgi4")
 [node name="player1" type="Node2D" parent="root_tile/TileMapLayer"]
 script = ExtResource("14_dp3eg")
 
+[node name="player2" type="Node2D" parent="root_tile/TileMapLayer"]
+script = ExtResource("14_dp3eg")
+
 [node name="Highligth_Map" type="TileMapLayer" parent="root_tile"]
 tile_set = SubResource("TileSet_7dm0k")
 
