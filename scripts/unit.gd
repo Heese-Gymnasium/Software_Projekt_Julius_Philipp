@@ -20,6 +20,22 @@ var y:
 		_y = value
 
 
+func to_active():
+	get_child(0).visible = false
+	get_child(1).visible = true
+
+func to_enemy():
+	get_child(1).visible = false
+	get_child(0).visible = true
+
+
+
+func turn_appearance_change(active_player):
+	var player = get_parent()
+	if(get_parent().get_parent().get_child(active_player) == player):
+		to_active()
+	else:
+		to_enemy()
 
 
 
@@ -27,6 +43,7 @@ func _spawn(spawn_x, spawn_y):
 	var pos_x = spawn_x
 	var pos_y = spawn_y
 	self.position = Vector2(pos_x, pos_y)
+	to_active()
 
 
 

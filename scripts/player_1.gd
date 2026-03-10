@@ -129,6 +129,18 @@ func finish_attack(trgt_coords : Vector2i): #idx ist die agierende unit, nicht d
 		push_error("no target")
 
 
+func units_change(active_player):
+	var enemy_player
+	if(active_player == 0):
+		enemy_player = 1
+	elif(active_player == 1):
+		enemy_player = 0
+	for child in self.get_children():
+		child.to_active()
+	for child in get_parent().get_child(enemy_player).get_children():
+		child.to_enemy()
+
+
 func _add_card_to_deck(card):
 	for cards in _cards_glossar:
 		if(cards.name == card):

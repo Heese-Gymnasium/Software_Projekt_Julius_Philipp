@@ -461,6 +461,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_npobg")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="root_tile"]
 visibility_layer = 2
+z_index = -1
 position = Vector2(-16, -8)
 tile_set = SubResource("TileSet_7dm0k")
 script = ExtResource("3_tbgi4")
