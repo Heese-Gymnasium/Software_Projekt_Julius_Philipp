@@ -2,13 +2,8 @@ extends Node2D
 
 var anti_Phlipflop_arbeitszeitbetrugs_index
 
-var mana = 3:
-	set(value):
-		get_tree().root.get_node("/Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label").update_stats({"mana" : mana})
-		if(value >= 0):
-			mana = value
-		elif(value < 0):
-			mana -= value
+var mana = 3
+
 
 var _cards_glossar = [
 	{"name" :  "Soldat beschwören", "cost" : 1}, 
@@ -107,6 +102,7 @@ func lose_hp(value, idx):
 		i += 1
 		if(unit["idx"] == idx):
 			unit["hp"] -= value
+			get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label").update_stats({"health" : unit["hp"]})
 			if(unit["hp"] <= 0):
 					units.remove_at(i)
 					var child_name = "unit_%d" % idx
@@ -164,17 +160,22 @@ func shuffle_hand_to_discard():
 func handle_card(card, trgt_coords : Vector2i):
 	var trgt_x = trgt_coords.x
 	var trgt_y = trgt_coords.y
-	for cards in _cards_glossar:
-		if(cards.name ==  card):
-			if(mana >= cards.cost):
-				if(card == "Soldat beschwören"):
-					_add_unit(trgt_x, trgt_y, "Soldat")
-					mana.set(-cards["cost"])
-					break
-				elif(card == "Magier beschwören"):
-					_add_unit(trgt_x, trgt_y, "Magier")
-					mana.set(-cards["cost"])
-					break
+	if(trgt_x > get_parent().Map_x or trgt_y > get_parent().Map_y or trgt_x < 0 or trgt_y < 0):
+		push_error("unit placed in void")
+	else:
+		for cards in _cards_glossar:
+			if(cards.name ==  card):
+				if(mana >= cards.cost):
+					if(card == "Soldat beschwören"):
+						_add_unit(trgt_x, trgt_y, "Soldat")
+						mana -= cards["cost"]
+						get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label").update_stats({"mana" : mana})
+						break
+					elif(card == "Magier beschwören"):
+						_add_unit(trgt_x, trgt_y, "Magier")
+						mana -= cards["cost"]
+						get_tree().root.get_node("Main/CanvasLayer/IngameUi/MarginContainer/Control/Control_Menue/HBoxContainer/Stats/Stats_shell/Stats_label").update_stats({"mana" : mana})
+						break
 
 
 
