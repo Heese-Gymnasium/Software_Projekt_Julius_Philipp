@@ -100,22 +100,14 @@ func attack_highlight(r, pos):
 
 			# Euklidische Distanz (Kreis)
 			if dx * dx + dy * dy < r * r:
-				highligthet.append(p)
-				highlight_map.set_cell(p, source_id, Vector2i(1, 0))
+				if(p.x < get_parent().get_child(0).Map_x - 1 && p.y <= get_parent().get_child(0).Map_y && p.x >= -1 && p.y >= 0):
+					highligthet.append(p)
+					highlight_map.set_cell(p, source_id, Vector2i(1, 0))
 func _attack_highlight_delete():
-	var r = drange
-	var pos = dPos
-	for x in range(pos.x - r, pos.x + r + 1):
-		for y in range(pos.y - r, pos.y + r + 2):
-			var p = Vector2i(x, y)
+	for p in highligthet:
+		highlight_map.set_cell(p, source_id, Vector2i(3, 1))
+	highligthet.clear()
 
-			var dx = p.x - pos.x 
-			var dy = p.y - pos.y - 1
-
-			# Euklidische Distanz (Kreis)
-			if dx * dx + dy * dy < r * r:
-				highligthet.erase(p)
-				highlight_map.set_cell(p, source_id, Vector2i(3, 1))
 
 
 func _action_return():
